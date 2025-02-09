@@ -16,7 +16,7 @@ import LeadCard from "src/components/Cards/LeadCard";
 // route: /allproperties
 
 const AllPropertiesPage = () => {
-  const [allLeads, setLeads] = React.useState<AllLeads | null>(null);
+  const [allLeads, setAllLeads] = React.useState<AllLeads | null>(null);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [isLoaded, setIsLoaded] = React.useState<boolean>(false);
 
@@ -31,7 +31,7 @@ const AllPropertiesPage = () => {
   ): Promise<void> {
     try {
       const data = await findAllLeads(createdAt, pageNumber, search);
-      setLeads(data);
+      setAllLeads(data);
     } catch (error) {
       toast.error(
         `Failed to fetch Leads with error ${(error as Error).message}`,

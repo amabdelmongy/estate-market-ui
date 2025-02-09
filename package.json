@@ -27,10 +27,13 @@
     "@mantine/nprogress": "^7.4.2",
     "@next/third-parties": "^14.1.0",
     "@tabler/icons-react": "^2.46.0",
+    "axios": "^1.7.9",
     "dayjs": "^1.11.10",
     "embla-carousel": "8.0.0-rc17",
     "embla-carousel-autoplay": "8.0.0-rc17",
     "embla-carousel-react": "7.1.0",
+    "moment": "^2.30.1",
+    "moment-timezone": "^0.5.47",
     "next": "^14.1.0",
     "next-themes": "^0.2.1",
     "nextjs-toploader": "^1.6.4",
@@ -38,10 +41,13 @@
     "react-awesome-reveal": "^4.2.7",
     "react-dom": "^18.2.0",
     "react-fast-marquee": "^1.6.3",
-    "react-medium-image-zoom": "^5.1.10"
+    "react-medium-image-zoom": "^5.1.10",
+    "react-toastify": "^11.0.3"
   },
   "devDependencies": {
     "@tailwindcss/line-clamp": "^0.4.4",
+    "@types/moment": "^2.11.29",
+    "@types/moment-timezone": "^0.5.13",
     "@types/node": "20.10.5",
     "@types/react": "18.2.46",
     "autoprefixer": "^10.4.17",

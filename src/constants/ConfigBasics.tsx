@@ -11,8 +11,8 @@ interface BasicsInfoConstants {
 
 export const ConfigBasicInfo: BasicsInfoConstants = {
   radius: 20,
-  name: "HEAVENESTATE",
+  name: "Real Estate Market",
   subtitle1: "Choose a place to live like in heaven",
   subtitle2:
-    "Choose the best places to live over 20M+ worldwide houses, apartments and rooms in one place",
+    "Choose the best places to live over 200k+ houses and apartments in one place",
 };

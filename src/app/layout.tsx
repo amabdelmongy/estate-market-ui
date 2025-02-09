@@ -3,8 +3,8 @@ import "./globals.css";
 import Navbar from "../components/Navbar/page";
 import { Quicksand } from "next/font/google";
 export const metadata: Metadata = {
-  title: "Heavenestate",
-  description: "Heavenestate",
+  title: "Real Estate Market",
+  description: "Real Estate Market",
 };
 import Footer from "src/components/Footer/page";
 import Providers from "src/components/Providers/page";

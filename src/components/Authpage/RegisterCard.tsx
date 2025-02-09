@@ -5,44 +5,79 @@ import PrimaryButton from "../Buttons/PrimaryButton";
 import Link from "next/link";
 import {
   TextInput,
-  Checkbox,
   PasswordInput,
   Group,
-  Select,
-  Button,
 } from "@mantine/core";
 import { IconMailFast } from "@tabler/icons-react";
 import { useForm } from "@mantine/form";
 import { showNotification } from "@mantine/notifications";
 import AuthPageConfig from "src/constants/ConfigAuthPage";
 import { ConfigBasicInfo } from "src/constants/ConfigBasics";
+import { useRouter } from "next/navigation";
+import { useUser } from "@/hooks/use-user";
+import { authClient } from "@/lib/auth/client";
+import { FRONT_URL } from "@/lib/env-config";
 
 // authentication page
 // register page
 
 const RegisterForm = () => {
+
+  const router = useRouter();
+
+  const { checkSession } = useUser();
+
+
+  const [isPending, setIsPending] = React.useState<boolean>(false);
   // Submit function function
-  function submit(values: any) {
-    // Toast notification
-    showNotification({
+  const submit = React.useCallback(
+    async (values:any): Promise<void> => {
+      setIsPending(true);
+      const  response  = await authClient.signUp({
+        email: values.email,
+        password: values.password,
+        name: values.name,
+      });
+
+      if (response.error) {
+        showNotification({
+          title: "Error",
+          message: response.error.toString(),
+          color: "red",
+        });
+        setIsPending(false);
+        return;
+      }
+      setIsPending(false);
+            showNotification({
       title: "Success",
-      message: "User registered " + values.name.toString(),
+      message: "Login as " + values.email.toString(),
       color: "green",
     });
-  }
+      // Refresh the auth state
+      await checkSession?.();
+
+      // UserProvider, for this case, will not refresh the router
+      // After refresh, GuestGuard will handle the redirect
+      router.push(`${FRONT_URL}/auth/login`);
+      window.location.href = `${FRONT_URL}/auth/login`;
+      router.push(`${FRONT_URL}/auth/login`);
+    },
+    [checkSession, router]
+  );
 
   // Sign in form
   const form = useForm({
     initialValues: {
       name: "",
       email: "",
-      password: "",
-      country: "",
-      termsOfService: false,
+      password: ""
     },
 
     validate: {
       email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
+      password: (value) => (/^\S/.test(value) ? null : "Invalid password"),
+      name: (value) => (/^\S/.test(value) ? null : "Invalid name")
     },
   });
 
@@ -64,6 +99,7 @@ const RegisterForm = () => {
               label="Name"
               placeholder="John doe"
               {...form.getInputProps("name")}
+              onBlur={() => form.validateField("name")}
               classNames={{
                 label: "dark:text-white",
                 input: "dark:bg-slate-800 dark:text-white/90",
@@ -76,6 +112,7 @@ const RegisterForm = () => {
               label="Email"
               placeholder="your@email.com"
               {...form.getInputProps("email")}
+              onBlur={() => form.validateField("email")}
               classNames={{
                 label: "dark:text-white",
                 input: "dark:bg-slate-800 dark:text-white/90",
@@ -88,47 +125,18 @@ const RegisterForm = () => {
               placeholder="Password"
               label="Password"
               {...form.getInputProps("password")}
+              onBlur={() => form.validateField("password")}
               classNames={{
                 label: "dark:text-white",
                 input: "dark:bg-slate-800 dark:text-white/90",
               }}
-            />
-            {/* Re-Password */}
-            <PasswordInput
-              withAsterisk
-              placeholder="Retype-Password"
-              label="Retype-Password"
-              classNames={{
-                label: "dark:text-white",
-                input: "dark:bg-slate-800 dark:text-white/90",
-              }}
-            />
-
-            {/* Country */}
-            <Select
-              withAsterisk
-              label="Country"
-              placeholder="Your country"
-              data={[
-                { value: "sl", label: "Sri Lanka" },
-                { value: "nz", label: "New zeland" },
-              ]}
-              {...form.getInputProps("country")}
-              classNames={{
-                label: "dark:text-white",
-                input: "dark:bg-slate-800 dark:text-white/90",
-              }}
-            />
-
-            <Checkbox
-              required
-              mt="md"
-              label="I agree to term and conditions"
-              {...form.getInputProps("termsOfService", { type: "checkbox" })}
             />
 
             <Group mt="md">
-              <PrimaryButton text="Submit" icon={<IconMailFast />} />
+              <PrimaryButton text="Submit" icon={<IconMailFast />}
+                disabled={!(form.errors && Object.keys(form.errors).length === 0 && form.errors.constructor === Object) && isPending}
+                onClick={(values) => submit(form.values)}
+              />
             </Group>
           </form>
           {/* Login link */}

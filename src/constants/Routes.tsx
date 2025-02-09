@@ -3,6 +3,7 @@
 interface RoutesProps {
   home: string;
   property: string;
+  lead: string;
   addProperty: string;
   allProperties: string;
   login: string;
@@ -16,6 +17,7 @@ export const Routes: RoutesProps = {
 
   // Properties routes
   property: "/property/", // individual property view [id] means dynamic route , append id at the end
+  lead: "/lead/", // individual property view [id] means dynamic route , append id at the end
   addProperty: "/addproperty/", // add individual property page
   allProperties: "/allproperties/", // view all properties view
 

@@ -9,7 +9,6 @@ import { ConfigColors } from "src/constants/ConfigColors";
 import { ConfigSizes } from "src/constants/ConfigSizes";
 import { Lead } from "@/types/lead";
 
-
 export interface LeadCardProps {
   lead: Lead;
 }

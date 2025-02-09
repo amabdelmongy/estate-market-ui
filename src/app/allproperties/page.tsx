@@ -1,7 +1,7 @@
 "use client";
 import Head from "next/head";
 import AllPropertiesHeader from "../../components/AllPropertiesView/AllPropertiesHeader";
-import { Container } from "@mantine/core";
+import { Container, Pagination } from "@mantine/core";
 import { Fade } from "react-awesome-reveal";
 import { ConfigBasicInfo } from "src/constants/ConfigBasics";
 import { ConfigColors } from "src/constants/ConfigColors";
@@ -19,6 +19,10 @@ const AllPropertiesPage = () => {
   const [allLeads, setLeads] = React.useState<AllLeads | null>(null);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [isLoaded, setIsLoaded] = React.useState<boolean>(false);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
   async function fetchData(
     pageNumber: number,
@@ -74,6 +78,13 @@ const AllPropertiesPage = () => {
                 ))}
             </Suspense>
           </div>
+        </section>
+        <section className="mt-12">
+          <Pagination
+            total={allLeads ? allLeads.pages : 1}
+            value={currentPage}
+            onChange={handlePageChange}
+          />
         </section>
       </Container>
     </>

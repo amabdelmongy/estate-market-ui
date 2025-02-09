@@ -1,11 +1,37 @@
 // "use client";
 import React, { Suspense } from "react";
-import PropertyCard from "../Cards/PropertyCard";
 import { Fade } from "react-awesome-reveal";
-import { PropertiesData } from "../../Data/propertiesData";
+import { findAllLeads } from "@/services/lead-service";
+import { AllLeads } from "@/types/lead";
+import { toast } from "react-toastify";
+import LeadCard from "../Cards/LeadCard";
 
 const TopPropertiesSection = async () => {
-  // await new Promise((resolve) => setTimeout(resolve, 3000)); // 3 seconds delayage
+  const [allLeads, setAllLeads] = React.useState<AllLeads | null>(null);
+  const [isLoaded, setIsLoaded] = React.useState<boolean>(false);
+
+  async function fetchData(
+    pageNumber: number,
+    createdAt: Date | null,
+    search: string | null,
+  ): Promise<void> {
+    try {
+      const data = await findAllLeads(createdAt, pageNumber, search);
+      setAllLeads(data);
+    } catch (error) {
+      toast.error(
+        `Failed to fetch Leads with error ${(error as Error).message}`,
+      );
+    }
+  }
+
+  React.useEffect(() => {
+    setIsLoaded(true);
+    if (isLoaded) {
+      void fetchData(1, null, null);
+    }
+  }, [isLoaded]);
+
   return (
     <>
       {/* Populated grid */}
@@ -13,23 +39,9 @@ const TopPropertiesSection = async () => {
         <Suspense
           fallback={<h1 className="text-2xl text-white">Loading ... </h1>}
         >
-          {PropertiesData.slice(0, 8).map((property, index) => (
-            <Fade cascade triggerOnce key={index}>
-              {/* Replace index with unique id of property to the Link component below */}
-              <PropertyCard
-                id={property.id}
-                title={property.title}
-                features={{
-                  bathrooms: property.bathrooms,
-                  bedrooms: property.bedrooms,
-                }}
-                images={property.images}
-                link={"/property/" + property.slug}
-                price={property.price}
-                propertyLocation={property.location}
-                propertyType={property.type}
-                tags={property.tags}
-              />
+          {allLeads?.leads?.map((lead) => (
+            <Fade cascade triggerOnce key={lead._id}>
+              <LeadCard lead={lead} />
             </Fade>
           ))}
         </Suspense>

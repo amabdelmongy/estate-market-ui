@@ -16,6 +16,7 @@
     "dev": "npm run format:write; npm run lint:fix; tsc --noEmit; next dev"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
     "@mantine/carousel": "^7.4.2",
     "@mantine/core": "^7.4.2",
     "@mantine/dates": "^7.4.2",

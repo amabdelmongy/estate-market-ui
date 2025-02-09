@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import { Badge, Container } from "@mantine/core";
+import { Container } from "@mantine/core";
 import MainImagesGalery from "../../../components/PropertyView/MainImagesGalery";
 import Image from "next/image";
 import { showNotification } from "@mantine/notifications";
-import { SinglePropertyData } from "src/Data/singlePropertyData";
+import { Badge } from "@mantine/core";
 import VirtualTourSection from "src/components/PropertyView/VirtualTour";
 import FreaturesSection from "../../../components/PropertyView/Features";
 import AddressSection from "../../../components/PropertyView/Address";
@@ -18,6 +18,11 @@ import useNumberFormatter from "src/hooks/useNumberFormatter";
 import ConsultantSection from "src/components/PropertyView/Consultant";
 import { IconCheck, IconX } from "@tabler/icons-react";
 import { ConfigColors } from "src/constants/ConfigColors";
+import { findLeadById } from "@/services/lead-service";
+import { Lead } from "@/types/lead";
+import { useParams } from "next/navigation";
+import { toast } from "react-toastify";
+import { SinglePropertyData } from "@/Data/singlePropertyData";
 
 // individual property page
 // [id] - mean the dynamic route pass the indiividual property id or slug param with Next.js Link component
@@ -26,12 +31,25 @@ import { ConfigColors } from "src/constants/ConfigColors";
 const PropertyPage = () => {
   // current bookmark state
   const [isBookmark, setIsBookmark] = useState(false);
+  const { id } = useParams();
+  const [lead, setLead] = React.useState<Lead | null>(null);
+
+  const images = [
+    "/images/homes/house1.jpg",
+    "/images/homes/house2.jpg",
+    "/images/homes/house3.jpg",
+    "/images/homes/house4.jpg",
+    "/images/homes/house5.jpg",
+  ];
+
+  function getRandomNumber(): number {
+    return Math.floor(Math.random() * 4) + 1;
+  }
 
   // Bookmark function (oncleick)
   function bookmark() {
     // Set bookmark state
     setIsBookmark(!isBookmark);
-
     // Toast notification
     showNotification({
       title: "Bookmark",
@@ -44,12 +62,33 @@ const PropertyPage = () => {
       color: isBookmark ? ConfigColors.danger : ConfigColors.primary,
     });
   }
+
+  React.useEffect(() => {
+    async function fetchData(): Promise<void> {
+      try {
+        if (typeof id !== "string") {
+          // showNotification.error('id must be a string');
+          showNotification({
+            message: "id must be a string",
+          });
+          return;
+        }
+        const data = await findLeadById(id);
+        setLead(data);
+      } catch (error) {
+        toast.error(
+          `Failed to find Lead for id ${String(id)} with error ${(error as Error).message}`,
+        );
+      }
+    }
+    void fetchData();
+  }, [id]);
   return (
     <Container size="xl" className="mt-24">
       <div className="relative">
         {/* Main images gallery */}
         <div>
-          <MainImagesGalery imagesSrc={SinglePropertyData.images} />
+          <MainImagesGalery imagesSrc={images} />
         </div>
 
         {/* Bookmark */}
@@ -72,7 +111,7 @@ const PropertyPage = () => {
         {/* left */}
         {/* Title */}
         <h1 className="text-base font-bold dark:text-white/90 tablet:text-xl pc:text-2xl">
-          {SinglePropertyData.title}
+          {lead?.lead_owner_firstname + " " + lead?.lead_owner_lastname}
         </h1>
 
         {/* right */}
@@ -81,18 +120,16 @@ const PropertyPage = () => {
           className="rounded-default rounded-sm px-4 py-2 text-center text-base font-bold text-white shadow-sm tablet:text-xl pc:text-2xl"
           style={{ background: ConfigColors.primary }}
         >
-          {useNumberFormatter(SinglePropertyData.price)}
+          {useNumberFormatter(lead?.lead_ask_price ?? 0)}
         </h1>
       </div>
       {/* Location */}
       <div className="mb-2 text-sm italic text-black/80 dark:text-white/90 pc:text-base">
-        {SinglePropertyData.address.city +
-          " , " +
-          SinglePropertyData.address.country}
+        {lead?.lead_prop_address}
       </div>
       {/* Badges */}
       <div className="flex w-full gap-x-4 overflow-x-hidden whitespace-nowrap">
-        {SinglePropertyData.tags.map((tag, idx) => (
+        {lead?.tags?.map((tag, idx) => (
           <Badge
             key={idx}
             size="lg"
@@ -111,21 +148,18 @@ const PropertyPage = () => {
         {/* overview */}
         <div>
           <OverviewSection
-            bathrooms={SinglePropertyData.overview.bathrooms}
-            bedrooms={SinglePropertyData.overview.bedrooms}
-            builtYear={SinglePropertyData.overview.builtYear}
-            floors={SinglePropertyData.overview.floors}
-            garages={SinglePropertyData.overview.garages}
-            sqfeets={SinglePropertyData.overview.sqfeets}
+            bathrooms={lead?.building_bathrooms ?? 0}
+            bedrooms={lead?.building_bedrooms ?? 0}
+            builtYear={1992}
+            floors={3}
+            garages={4}
+            sqfeets={5}
           />
         </div>
 
         {/* description */}
         <div>
-          <DescriptionSection
-            description={SinglePropertyData.description}
-            docs={SinglePropertyData.documents}
-          />
+          <DescriptionSection description={lead?.lead_info ?? ""} docs={[]} />
         </div>
 
         {/* address */}

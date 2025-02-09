@@ -27,7 +27,7 @@ export default function LeadCard({ lead }: Readonly<LeadCardProps>) {
   }
 
   return (
-    <Link href={"/property/" + lead?._id}>
+    <Link href={"/lead/" + lead?._id}>
       <div
         className="rounded-default group flex h-full flex-col items-center rounded bg-white text-left duration-300 hover:border-2 hover:shadow-lg dark:bg-gray-900 "
         style={{ border: `1px solid ${ConfigColors.primary}` }}

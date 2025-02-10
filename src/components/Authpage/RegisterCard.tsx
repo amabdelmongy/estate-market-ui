@@ -3,11 +3,7 @@ import React from "react";
 import Image from "next/image";
 import PrimaryButton from "../Buttons/PrimaryButton";
 import Link from "next/link";
-import {
-  TextInput,
-  PasswordInput,
-  Group,
-} from "@mantine/core";
+import { TextInput, PasswordInput, Group } from "@mantine/core";
 import { IconMailFast } from "@tabler/icons-react";
 import { useForm } from "@mantine/form";
 import { showNotification } from "@mantine/notifications";
@@ -22,18 +18,16 @@ import { FRONT_URL } from "@/lib/env-config";
 // register page
 
 const RegisterForm = () => {
-
   const router = useRouter();
 
   const { checkSession } = useUser();
 
-
   const [isPending, setIsPending] = React.useState<boolean>(false);
   // Submit function function
   const submit = React.useCallback(
-    async (values:any): Promise<void> => {
+    async (values: any): Promise<void> => {
       setIsPending(true);
-      const  response  = await authClient.signUp({
+      const response = await authClient.signUp({
         email: values.email,
         password: values.password,
         name: values.name,
@@ -49,11 +43,11 @@ const RegisterForm = () => {
         return;
       }
       setIsPending(false);
-            showNotification({
-      title: "Success",
-      message: "Login as " + values.email.toString(),
-      color: "green",
-    });
+      showNotification({
+        title: "Success",
+        message: "Login as " + values.email.toString(),
+        color: "green",
+      });
       // Refresh the auth state
       await checkSession?.();
 
@@ -63,7 +57,7 @@ const RegisterForm = () => {
       window.location.href = `${FRONT_URL}/auth/login`;
       router.push(`${FRONT_URL}/auth/login`);
     },
-    [checkSession, router]
+    [checkSession, router],
   );
 
   // Sign in form
@@ -71,13 +65,13 @@ const RegisterForm = () => {
     initialValues: {
       name: "",
       email: "",
-      password: ""
+      password: "",
     },
 
     validate: {
       email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
       password: (value) => (/^\S/.test(value) ? null : "Invalid password"),
-      name: (value) => (/^\S/.test(value) ? null : "Invalid name")
+      name: (value) => (/^\S/.test(value) ? null : "Invalid name"),
     },
   });
 
@@ -133,8 +127,16 @@ const RegisterForm = () => {
             />
 
             <Group mt="md">
-              <PrimaryButton text="Submit" icon={<IconMailFast />}
-                disabled={!(form.errors && Object.keys(form.errors).length === 0 && form.errors.constructor === Object) && isPending}
+              <PrimaryButton
+                text="Submit"
+                icon={<IconMailFast />}
+                disabled={
+                  !(
+                    form.errors &&
+                    Object.keys(form.errors).length === 0 &&
+                    form.errors.constructor === Object
+                  ) && isPending
+                }
                 onClick={(values) => submit(form.values)}
               />
             </Group>

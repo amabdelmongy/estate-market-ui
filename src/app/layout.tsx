@@ -29,11 +29,11 @@ export default function RootLayout({
       <body className="bg-gray-200 dark:bg-slate-800">
         <GoogleAnalytics gaId={APIKEY as string} />
         <UserProvider>
-        <Providers>
-          <Navbar />
-          {children}
-          <Footer />
-        </Providers>
+          <Providers>
+            <Navbar />
+            {children}
+            <Footer />
+          </Providers>
         </UserProvider>
       </body>
     </html>

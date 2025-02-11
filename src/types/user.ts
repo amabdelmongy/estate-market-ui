@@ -31,12 +31,12 @@ export interface LoggedInUser {
 }
 
 export const timeZones = [
-  '',
-  'America/New_York',
-  'America/Chicago',
-  'America/Denver',
-  'America/Los_Angeles',
-  'America/Anchorage',
-  'America/Phoenix',
-  'Pacific/Honolulu',
+  "",
+  "America/New_York",
+  "America/Chicago",
+  "America/Denver",
+  "America/Los_Angeles",
+  "America/Anchorage",
+  "America/Phoenix",
+  "Pacific/Honolulu",
 ] as const;

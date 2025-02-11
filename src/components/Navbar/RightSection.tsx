@@ -19,6 +19,11 @@ import { ConfigBasicInfo } from "src/constants/ConfigBasics";
 import { useTheme } from "next-themes";
 import { IconSunLow } from "@tabler/icons-react";
 import { ConfigSizes } from "src/constants/ConfigSizes";
+import { useUser } from "@/hooks/use-user";
+import { useRouter } from "next/navigation";
+import { LoggedInUser } from "@/types/user";
+import { authClient } from "@/lib/auth/client";
+import { logger } from "@/lib/default-logger";
 // right secttion of the navbar
 interface IDrawerItems {
   title: string;
@@ -27,15 +32,49 @@ interface IDrawerItems {
 }
 
 const RightSection = () => {
+  const { checkSession } = useUser();
+  const loggedUserData = localStorage.getItem("custom-auth-user");
+
+  let userName = "";
+  let userEmail = "";
+  const userData = loggedUserData
+    ? (JSON.parse(loggedUserData) as LoggedInUser)
+    : undefined;
+  if (userData) {
+    userName = userData?.name ?? "";
+    userEmail = userData?.email ?? "";
+  }
+
+  const router = useRouter();
+
+  const handleSignOut = React.useCallback(async (): Promise<void> => {
+    try {
+      const { error } = await authClient.signOut();
+
+      if (error) {
+        logger.error("Sign out error", error);
+        return;
+      }
+
+      // Refresh the auth state
+      await checkSession?.();
+
+      // UserProvider, for this case, will not refresh the router and we need to do it manually
+      router.refresh();
+      // After refresh, AuthGuard will handle the redirect
+    } catch (err) {
+      logger.error("Sign out error", err);
+    }
+  }, [checkSession, router]);
   // Is user authenticated or not?
   const [opened, { open, close }] = useDisclosure(false);
 
   const DrawerItems: IDrawerItems[] = [
     { title: "Home", link: Routes.home },
-    { title: "My profile", link: Routes.profile + UserData.username },
+    ...(userData ? [{ title: "My profile", link: Routes.profile + UserData.username }] : []),
     { title: "All properties", link: Routes.allProperties },
-    { title: "Add property", link: Routes.addProperty },
-    { title: "Logout", link: Routes.login, red: true },
+    ...(userData ? [{ title: "Add property", link: Routes.addProperty }] : []),
+    ...(userData ? [{ title: "Logout", link: Routes.login, red: true }] : []),
   ];
   // dark mode
   const { theme, setTheme } = useTheme();
@@ -133,15 +172,26 @@ const RightSection = () => {
           <div>
             <div className="flex w-full flex-col space-y-4">
               <Fade cascade direction="right" duration={200}>
-                {DrawerItems.map((item, idx) => (
-                  <Link href={item.link} key={idx}>
-                    <SecondaryButton
-                      text={item.title}
-                      fullWidth
-                      color={item.red ? "danger" : undefined}
-                    />
-                  </Link>
-                ))}
+                {DrawerItems.map((item, idx) =>
+                  item.title !== "Logout" ? (
+                    <Link href={item.link} key={idx}>
+                      <SecondaryButton
+                        text={item.title}
+                        fullWidth
+                        color={item.red ? "danger" : undefined}
+                      />
+                    </Link>
+                  ) : (
+                    <Link href={item.link} key={idx}>
+                      <SecondaryButton
+                        onClick={()=> handleSignOut()}
+                        text={item.title}
+                        fullWidth
+                        color={item.red ? "danger" : undefined}
+                      />
+                    </Link>
+                  ),
+                )}
               </Fade>
             </div>
           </div>

@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 import Footer from "src/components/Footer/page";
 import Providers from "src/components/Providers/page";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { UserProvider } from "@/contexts/user-context";
 
 const quicksand = Quicksand({
   subsets: ["latin"],
@@ -27,11 +28,13 @@ export default function RootLayout({
     <html lang="en" className={quicksand.className} suppressHydrationWarning>
       <body className="bg-gray-200 dark:bg-slate-800">
         <GoogleAnalytics gaId={APIKEY as string} />
+        <UserProvider>
         <Providers>
           <Navbar />
           {children}
           <Footer />
         </Providers>
+        </UserProvider>
       </body>
     </html>
   );

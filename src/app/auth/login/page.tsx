@@ -9,7 +9,7 @@ const LoginPage = () => {
   return (
     <Container
       size="xl"
-      className="mt-20 flex h-screen items-center justify-center"
+      className="mt-32 flex  items-center justify-center"
     >
       <LoginCard />
     </Container>

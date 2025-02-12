@@ -33,8 +33,11 @@ interface IDrawerItems {
 
 const RightSection = () => {
   const { checkSession } = useUser();
-  const loggedUserData = localStorage.getItem("custom-auth-user");
-
+  // const loggedUserData = localStorage.getItem("custom-auth-user");
+  let loggedUserData: string | null = null;
+  if (typeof window !== "undefined") {
+    loggedUserData = localStorage.getItem("custom-auth-user");
+  }
   let userName = "";
   let userEmail = "";
   const userData = loggedUserData
@@ -71,7 +74,9 @@ const RightSection = () => {
 
   const DrawerItems: IDrawerItems[] = [
     { title: "Home", link: Routes.home },
-    ...(userData ? [{ title: "My profile", link: Routes.profile + UserData.username }] : []),
+    ...(userData
+      ? [{ title: "My profile", link: Routes.profile + UserData.username }]
+      : []),
     { title: "All properties", link: Routes.allProperties },
     ...(userData ? [{ title: "Add property", link: Routes.addProperty }] : []),
     ...(userData ? [{ title: "Logout", link: Routes.login, red: true }] : []),
@@ -184,7 +189,7 @@ const RightSection = () => {
                   ) : (
                     <Link href={item.link} key={idx}>
                       <SecondaryButton
-                        onClick={()=> handleSignOut()}
+                        onClick={() => handleSignOut()}
                         text={item.title}
                         fullWidth
                         color={item.red ? "danger" : undefined}

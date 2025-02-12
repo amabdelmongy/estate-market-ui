@@ -68,7 +68,7 @@ const LoginForm = () => {
   });
 
   return (
-    <div className="rounded-default flex h-full w-full flex-col-reverse space-x-2 bg-white shadow-lg dark:bg-slate-900 dark:text-white/90 laptop:flex-row">
+    <div className="rounded-default flex h-full w-full flex-col-reverse space-x-2 bg-white shadow-lg dark:bg-slate-900 dark:text-white/90 tablet:flex-row">
       {/* left */}
       <div className="basis-1/2">
         <div className="relative flex h-full w-full items-center justify-center">
@@ -85,7 +85,7 @@ const LoginForm = () => {
         </div>
       </div>
       {/* right */}
-      <div className="basis-1/2">
+      <div className="basis-1/2 background-white ml-0">
         <div className="p-4">
           <div className="my-4 text-center text-2xl font-bold">
             Welcome back to {ConfigBasicInfo.name}

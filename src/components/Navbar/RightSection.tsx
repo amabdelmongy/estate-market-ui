@@ -33,7 +33,7 @@ interface IDrawerItems {
 
 const RightSection = () => {
   const { checkSession } = useUser();
-  // const loggedUserData = localStorage.getItem("custom-auth-user");
+
   let loggedUserData: string | null = null;
   if (typeof window !== "undefined") {
     loggedUserData = localStorage.getItem("custom-auth-user");
@@ -75,11 +75,12 @@ const RightSection = () => {
   const DrawerItems: IDrawerItems[] = [
     { title: "Home", link: Routes.home },
     ...(userData
-      ? [{ title: "My profile", link: Routes.profile + UserData.username }]
+      ? [{ title: "My profile", link: Routes.profile + userData.name }]
       : []),
     { title: "All properties", link: Routes.allProperties },
     ...(userData ? [{ title: "Add property", link: Routes.addProperty }] : []),
     ...(userData ? [{ title: "Logout", link: Routes.login, red: true }] : []),
+    ...(!userData ? [{ title: "Login", link: Routes.login }] : []),
   ];
   // dark mode
   const { theme, setTheme } = useTheme();
@@ -158,20 +159,20 @@ const RightSection = () => {
               {ConfigBasicInfo.name}
             </h1>
 
-            <Image
+            {/* <Image
               src={UserData.avatar}
               width={200}
               height={200}
-              className="m-auto mt-10 aspect-square rounded object-cover shadow-md"
+              className="m-auto  aspect-square rounded object-cover shadow-md"
               alt="Profile picture"
-            />
+            /> */}
           </div>
         </div>
 
         <div className="mt-32 flex w-full flex-col items-center justify-center gap-y-4">
           <div>
             <h1 className="text-2xl font-bold dark:text-white/90">
-              {UserData.name}
+              {userData?.name}
             </h1>
           </div>
           <div>

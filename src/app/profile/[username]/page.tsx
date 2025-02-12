@@ -9,21 +9,35 @@ import { PropertiesData } from "src/Data/propertiesData";
 import PropertyCard from "src/components/Cards/PropertyCard";
 import Link from "next/link";
 import { ConfigColors } from "src/constants/ConfigColors";
-
+import { LoggedInUser } from "@/types/user";
 // individual profile page of the user/agent/consultant
 // [id] - mean the dynamic route pass the user's id or slug param with Next.js Link component
 // route: /profile/123
 
 const ProfileViewPage = () => {
+  let loggedUserData: string | null = null;
+  if (typeof window !== "undefined") {
+    loggedUserData = localStorage.getItem("custom-auth-user");
+  }
+  let userName = "";
+  let userEmail = "";
+  const userData = loggedUserData
+    ? (JSON.parse(loggedUserData) as LoggedInUser)
+    : undefined;
+  if (userData) {
+    userName = userData?.name ?? "";
+    userEmail = userData?.email ?? "";
+  }
+  
   return (
     <Container size="xl" className="mt-24">
       <div className="flex mobile:flex-col pc:flex-row pc:space-x-2 ">
         {/* left section */}
         <div className="basis-1/3 space-y-2">
           {/* Avatar */}
-          <div className="">
+          <div className="hidden">
             <Image
-              src={UserData.avatar}
+              src={UserData?.avatar}
               width={500}
               height={500}
               className="rounded-default aspect-square object-cover"
@@ -33,9 +47,9 @@ const ProfileViewPage = () => {
           {/* Personal details */}
           <div className="bg-white p-2 dark:bg-slate-900 dark:text-white/90">
             {/* Name */}
-            <div className="text-2xl font-bold">{UserData.name}</div>
+            <div className="text-2xl font-bold">{userData?.name}</div>
             {/* Profession */}
-            <div className="text-lg opacity-80">{UserData.profession}</div>
+            <div className="text-lg opacity-80">{userData?.role}</div>
             {/* About me */}
             <p className="text-sm opacity-80">{UserData.aboutme}</p>
             {/* Ratings */}
@@ -53,10 +67,10 @@ const ProfileViewPage = () => {
             {/* basic info */}
             <ul className="flex flex-col gap-y-2">
               {/* address */}
-              <li className="flex gap-x-2">
+              {/* <li className="flex gap-x-2">
                 <IconDoor color={ConfigColors.primary} />
                 <span>{UserData.address}</span>
-              </li>
+              </li> */}
               {/* phone */}
               <li className="flex gap-x-2">
                 <IconPhone color={ConfigColors.primary} />
@@ -65,17 +79,17 @@ const ProfileViewPage = () => {
               {/* email */}
               <li className="flex gap-x-2">
                 <IconMail color={ConfigColors.primary} />
-                <span>{UserData.email}</span>
+                <span>{userData?.email}</span>
               </li>
               {/* website */}
-              <li className="flex gap-x-2">
+              {/* <li className="flex gap-x-2">
                 <IconWorldWww color={ConfigColors.primary} />
                 <span>{UserData.website}</span>
-              </li>
+              </li> */}
             </ul>
 
             {/* social links */}
-            <div className="mt-4 flex justify-between space-x-2">
+            <div className="mt-4 flex justify-between space-x-2 hidden">
               {UserData.socialLinks.map((link, idx) => (
                 <Link href={link.link} key={idx}>
                   {/* <SecondaryButton icon={link.icon} /> */}

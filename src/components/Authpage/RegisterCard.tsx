@@ -53,9 +53,9 @@ const RegisterForm = () => {
 
       // UserProvider, for this case, will not refresh the router
       // After refresh, GuestGuard will handle the redirect
-      router.replace(`${FRONT_URL}/auth/login`);
+      router.replace(`/auth/login`);
       // window.location.href = `${FRONT_URL}/auth/login`;
-      router.replace(`${FRONT_URL}/auth/login`);
+  
     },
     [checkSession, router],
   );

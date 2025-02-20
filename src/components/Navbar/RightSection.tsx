@@ -79,6 +79,7 @@ const RightSection = () => {
       : []),
     { title: "All properties", link: Routes.allProperties },
     ...(userData ? [{ title: "Add property", link: Routes.addProperty }] : []),
+    ...(userData ? [{ title: "Users", link: Routes.users }] : []),
     ...(userData ? [{ title: "Logout", link: Routes.login, red: true }] : []),
     ...(!userData ? [{ title: "Login", link: Routes.login }] : []),
   ];

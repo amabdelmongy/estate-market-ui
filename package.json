@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
     "@hookform/resolvers": "^3.10.0",
     "@mantine/carousel": "^7.4.2",
     "@mantine/core": "^7.4.2",
@@ -28,7 +29,9 @@
     "@mantine/next": "^6.0.21",
     "@mantine/notifications": "^7.4.2",
     "@mantine/nprogress": "^7.4.2",
+    "@mui/material": "^6.4.4",
     "@next/third-parties": "^14.1.0",
+    "@phosphor-icons/react": "^2.1.7",
     "@tabler/icons-react": "^2.46.0",
     "axios": "^1.7.9",
     "dayjs": "^1.11.10",
@@ -44,8 +47,10 @@
     "react-awesome-reveal": "^4.2.7",
     "react-dom": "^18.2.0",
     "react-fast-marquee": "^1.6.3",
+    "react-hook-form": "^7.54.2",
     "react-medium-image-zoom": "^5.1.10",
-    "react-toastify": "^11.0.3"
+    "react-toastify": "^11.0.3",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@tailwindcss/line-clamp": "^0.4.4",

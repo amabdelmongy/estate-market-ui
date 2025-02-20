@@ -28,7 +28,7 @@ const ProfileViewPage = () => {
     userName = userData?.name ?? "";
     userEmail = userData?.email ?? "";
   }
-  
+
   return (
     <Container size="xl" className="mt-24">
       <div className="flex mobile:flex-col pc:flex-row pc:space-x-2 ">
@@ -89,7 +89,7 @@ const ProfileViewPage = () => {
             </ul>
 
             {/* social links */}
-            <div className="mt-4 flex justify-between space-x-2 hidden">
+            <div className="mt-4 flex hidden justify-between space-x-2">
               {UserData.socialLinks.map((link, idx) => (
                 <Link href={link.link} key={idx}>
                   {/* <SecondaryButton icon={link.icon} /> */}

@@ -18,7 +18,10 @@ import { UsersTable } from "../../components/users/users-table";
 
 export default function Page(): React.JSX.Element {
   const router = useRouter();
-  const userRole = localStorage.getItem("custom-auth-role");
+
+  if (typeof window !== "undefined") {
+    const userRole = localStorage.getItem("custom-auth-role");
+  }
   // if (userRole !== "admin") router.push(`${FRONT_URL}/dashboard`);
   const [usersData, setUsersData] = React.useState<AllUsers>();
   const [page, setPage] = React.useState<number | null>(1);

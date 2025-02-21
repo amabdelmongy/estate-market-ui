@@ -85,7 +85,7 @@ const LoginForm = () => {
         </div>
       </div>
       {/* right */}
-      <div className="basis-1/2 background-white ml-0">
+      <div className="background-white ml-0 basis-1/2">
         <div className="p-4">
           <div className="my-4 text-center text-2xl font-bold">
             Welcome back to {ConfigBasicInfo.name}

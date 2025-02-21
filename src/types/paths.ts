@@ -9,9 +9,9 @@ export const paths = {
   dashboard: {
     overview: "/dashboard",
     account: "/dashboard/account",
-    users: "/dashboard/users",
+    users: "/users",
     newUser: "/dashboard/user/new-user",
-    user: "/dashboard/user",
+    user: "/user",
     leads: "/dashboard/leads",
     lead: "/dashboard/lead",
     newlead: "/dashboard/lead/new-lead",

@@ -7,10 +7,7 @@ import LoginCard from "../../../components/Authpage/LoginCard";
 
 const LoginPage = () => {
   return (
-    <Container
-      size="xl"
-      className="mt-32 flex  items-center justify-center"
-    >
+    <Container size="xl" className="mt-32 flex  items-center justify-center">
       <LoginCard />
     </Container>
   );

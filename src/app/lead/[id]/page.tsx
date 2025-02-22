@@ -1,10 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { Container } from "@mantine/core";
+import { Container, Badge } from "@mantine/core";
 import MainImagesGalery from "../../../components/PropertyView/MainImagesGalery";
 import Image from "next/image";
 import { showNotification } from "@mantine/notifications";
-import { Badge } from "@mantine/core";
 import VirtualTourSection from "src/components/PropertyView/VirtualTour";
 import FreaturesSection from "../../../components/PropertyView/Features";
 import AddressSection from "../../../components/PropertyView/Address";

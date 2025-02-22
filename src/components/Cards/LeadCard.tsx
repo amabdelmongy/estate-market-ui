@@ -1,13 +1,25 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { IconBed, IconBath } from "@tabler/icons-react";
-import { Badge } from "@mantine/core";
-import { IconMapPin } from "@tabler/icons-react";
+import {
+  IconBed,
+  IconBath,
+  IconCalendarClock,
+  IconBuilding,
+  IconUser,
+  IconClock,
+  IconHome,
+  IconEyeQuestion,
+  IconFriends,
+  IconMapPin,
+  IconHomeDollar
+} from "@tabler/icons-react";
 import useNumberFormatter from "src/hooks/useNumberFormatter";
 import { ConfigColors } from "src/constants/ConfigColors";
 import { ConfigSizes } from "src/constants/ConfigSizes";
-import { Lead } from "@/types/lead";
+import { ClosingTimeline, Lead, SellReasonOptions } from "@/types/lead";
+import { formatDateString } from "@/lib/format-date-string";
+import { OccupancyOptions } from "../../types/lead";
 
 export interface LeadCardProps {
   lead: Lead;
@@ -67,7 +79,10 @@ export default function LeadCard({ lead }: Readonly<LeadCardProps>) {
               className={`rounded-default bg-white px-4 text-lg font-bold dark:bg-slate-900 dark:text-white`}
               style={{ color: ConfigColors.primary }}
             >
-              ${useNumberFormatter(lead.lead_ask_price ?? 0)}
+              <span>Asking price: </span>
+              <span className="blur">
+                ${useNumberFormatter(lead.lead_ask_price ?? 0)}
+              </span>{" "}
             </div>
           </div>
         </div>
@@ -90,18 +105,80 @@ export default function LeadCard({ lead }: Readonly<LeadCardProps>) {
           </div>
 
           {/* Title */}
-          <div className="text-left font-bold text-black dark:text-white">
-            {lead.lead_owner_firstname + " " + lead.lead_owner_lastname}
+          <div className="text-left text-sm font-bold text-black/50 dark:text-white">
+            <div className="flex items-center space-x-2">
+              <IconUser size={ConfigSizes.smallIcons} />{" "}
+              <span>Owner Name: </span> <span className="blur">blur</span>{" "}
+            </div>
           </div>
-          {/* Type */}
-          <div className="text-left text-sm font-bold text-black/60 dark:text-white">
-            House
+          <div className="text-left text-sm font-bold text-black/50 dark:text-white">
+            <div className="flex items-center space-x-2">
+              <IconHomeDollar size={ConfigSizes.smallIcons} />{" "}
+              <span>Market Price: </span> <span className="blur">blur</span>{" "}
+            </div>
+          </div>
+          {/* createdAt */}
+          <div className="text-left text-sm font-bold text-black/50 dark:text-white">
+            <div className="flex items-center space-x-2">
+              <IconCalendarClock size={ConfigSizes.smallIcons} />{" "}
+              <span className="font-bold text-black/60 dark:text-white">
+                Date: {formatDateString(lead.createdAt)}
+              </span>
+            </div>
           </div>
           {/* Location */}
           <div className="text-left text-sm font-bold text-black/50 dark:text-white">
             <div className="flex items-center space-x-2">
+              <IconBuilding size={ConfigSizes.smallIcons} />{" "}
+              <span>City: {lead.lead_prop_address_full?.city}</span>{" "}
               <IconMapPin size={ConfigSizes.smallIcons} />{" "}
-              <span>{lead.lead_prop_address}</span>
+              <span>State: {lead.lead_prop_address_full?.state}</span>
+            </div>
+          </div>
+
+          <div>
+            <div className="text-left text-sm font-bold text-black/50 dark:text-white">
+              <div className="flex items-center space-x-2">
+                <IconClock size={ConfigSizes.smallIcons} />{" "}
+                <span>How Fast: </span>{" "}
+                <span>
+                  {lead.lead_closn_tmln
+                    ? ClosingTimeline[lead.lead_closn_tmln]
+                    : "Any Time"}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div className="text-left text-sm font-bold text-black/50 dark:text-white">
+              <div className="flex items-center space-x-2">
+                <IconEyeQuestion size={ConfigSizes.smallIcons} />{" "}
+                <span>Seller Reason: </span>{" "}
+                <span>
+                  {lead.lead_sell_reason
+                    ? SellReasonOptions[lead.lead_sell_reason]
+                    : ""}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div className="text-left text-sm font-bold text-black/50 dark:text-white">
+              <div className="flex items-center space-x-2">
+                <IconFriends size={ConfigSizes.smallIcons} />{" "}
+                <span> Anyone living in the house?</span>
+              </div>
+              <div className="flex items-cente" >
+
+                <span>
+                {"   "}
+                  {lead.lead_occupancy
+                    ? OccupancyOptions[lead.lead_occupancy]
+                    : ""}
+                </span>
+              </div>
             </div>
           </div>
 
@@ -117,9 +194,10 @@ export default function LeadCard({ lead }: Readonly<LeadCardProps>) {
               </div>
 
               <div>
-                <span className="font-bold text-black/60 dark:text-white">
+                <span className="blur">blur</span>{" "}
+                {/* <span className="font-bold text-black/60 dark:text-white">
                   {lead.building_bedrooms?.toString().padStart(2, "0")}
-                </span>
+                </span> */}
               </div>
             </div>
 
@@ -132,21 +210,20 @@ export default function LeadCard({ lead }: Readonly<LeadCardProps>) {
                 />
               </div>
               <div>
-                <span className="font-bold text-black/60 dark:text-white ">
+                <span className="blur">blur</span>{" "}
+                {/* <span className="font-bold text-black/60 dark:text-white ">
                   {lead.building_bathrooms?.toString().padStart(2, "0")}
-                </span>
+                </span> */}
               </div>
             </div>
           </div>
 
-          {/* tags */}
-          <div className="flex items-center space-x-2">
-            {/* tags array */}
-            {lead.tags?.map((tag: string, index: number) => (
-              <Badge key={index} color={ConfigColors.primary} radius="xs">
-                {tag}
-              </Badge>
-            ))}
+          <div className="text-left text-sm font-bold text-black/50 dark:text-white">
+            <div className="flex items-center space-x-2">
+              <IconHome size={ConfigSizes.smallIcons} />{" "}
+              <span>Year of Constructor: </span>{" "}
+              <span className="blur">blur</span>{" "}
+            </div>
           </div>
         </div>
       </div>

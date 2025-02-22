@@ -71,7 +71,7 @@ export default function Page(): React.JSX.Element {
             // href={paths.dashboard.newUser}
             startIcon={<PlusIcon fontSize="var(--icon-fontSize-md)" />}
             variant="contained"
-                          href={`${paths.dashboard.user}`}
+            href={`${paths.dashboard.user}`}
           >
             Add
           </Button>

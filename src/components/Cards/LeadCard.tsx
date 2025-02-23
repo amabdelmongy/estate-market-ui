@@ -50,27 +50,7 @@ export default function LeadCard({ lead }: Readonly<LeadCardProps>) {
             lat={lead.lead_prop_address_full?.lat}
             lng={lead.lead_prop_address_full?.lng}
           />
-
-          {/* Assets availability indicator */}
-          <div className="absolute left-0 top-0 flex flex-col p-1 text-left text-white">
-            {/* Images */}
-            <div>
-              <Image src="/icons/image.svg" width={20} height={20} alt="icon" />
-            </div>
-            {/* Video */}
-            <div>
-              <Image src="/icons/video.svg" width={20} height={20} alt="icon" />
-            </div>
-            {/* Map */}
-            <div>
-              <Image src="/icons/map.svg" width={20} height={20} alt="icon" />
-            </div>
-            {/* 3d visualization */}
-            <div>
-              <Image src="/icons/3d.svg" width={20} height={20} alt="icon" />
-            </div>
           </div>
-        </div>
 
         <Link href={"/lead/" + lead?._id}>
           <div className="flex flex-col space-y-2 p-2">

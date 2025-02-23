@@ -34,6 +34,7 @@ const MapComponent: React.FC<MapProps> = ({ lat, lng, width, height }) => {
 
     fetchCoordinates();
   }, [lat, lng]);
+  if (!position) return null; // Hide the component entirely when no position is available
 
   return (
     <div className="h-full min-h-[400px] w-full border border-gray-300 p-2">

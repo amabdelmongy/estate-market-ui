@@ -10,10 +10,10 @@ import { API_URL } from "@/lib/env-config";
 import axiosInstance from "./axios.instance";
 
 function GetLeadUrl(): string {
-  const token = localStorage.getItem("custom-auth-token");
-  if (token) {
-    return `${API_URL}lead`;
-  }
+  // const token = localStorage.getItem("custom-auth-token");
+  // if (token) {
+  //   return `${API_URL}lead`;
+  // }
 
   return `${API_URL}lead-public`;
 }

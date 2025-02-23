@@ -45,12 +45,15 @@ export default function LeadCard({ lead }: Readonly<LeadCardProps>) {
         className="rounded-default group flex h-full flex-col items-center rounded bg-white text-left duration-300 hover:border-2 hover:shadow-lg dark:bg-gray-900 "
         style={{ border: `1px solid ${ConfigColors.primary}` }}
       >
-        <div className="relative min-h-[300px] min-w-[200px] w-full flex-grow overflow-hidden">
+        <div
+          style={{ minHeight: "410px" }}
+          className="relative w-full rounded-lg border border-gray-300 bg-white p-1 p-2"
+        >
           <MapComponent
             lat={lead.lead_prop_address_full?.lat}
             lng={lead.lead_prop_address_full?.lng}
           />
-          </div>
+        </div>
 
         <Link href={"/lead/" + lead?._id}>
           <div className="flex flex-col space-y-2 p-2">

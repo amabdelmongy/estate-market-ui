@@ -9,11 +9,11 @@ import { API_URL } from "@/lib/env-config";
 
 import axiosInstance from "./axios.instance";
 
-function GetLeadUrl() : string {
-  const token = localStorage.getItem("custom-auth-token");
-  if(token){
-    return `${API_URL}lead`;
-  }
+function GetLeadUrl(): string {
+  // const token = localStorage.getItem("custom-auth-token");
+  // if (token) {
+  //   return `${API_URL}lead`;
+  // }
 
   return `${API_URL}lead-public`;
 }
@@ -24,7 +24,7 @@ export async function findAllLeads(
   search: string | null = "",
 ): Promise<AllLeads> {
   try {
-    let url = `${GetLeadUrl()}?page=${String(pageNumber)}`;
+    let url = `${GetLeadUrl()}?page=${String(pageNumber)}&pageLength=12`;
     if (createdAt) {
       url += `&createdAt=${String(moment(createdAt).format("YYYY-MM-DD"))}`;
     }

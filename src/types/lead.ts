@@ -35,8 +35,10 @@ export const DefaultLead: Lead = {
 };
 
 export interface lead_prop_address_full {
-   city?: string,
-   state?: string
+  city?: string;
+  state?: string;
+  lat?: number;
+  lng?: number;
 }
 
 export interface Lead {

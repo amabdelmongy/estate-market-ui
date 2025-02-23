@@ -1,59 +1,70 @@
+"use client"; // Ensure this component runs only in the browser
+
 import React, { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import L from "leaflet";
 
-const customMarkerIcon = new L.Icon({
-  iconUrl: "/images/mark_map.png",
-  iconSize: [30, 45],
-  iconAnchor: [15, 45],
-});
-
-interface MapProps {
-  lat?: number;
-  lng?: number;
-  width?: number;
-  height?: number;
-}
-
-const MapComponent: React.FC<MapProps> = ({ lat, lng, width, height }) => {
+const MapComponent: React.FC<{ lat?: number; lng?: number }> = ({
+  lat,
+  lng,
+}) => {
+  const [LeafletComponents, setLeafletComponents] = useState<any>(null);
   const [position, setPosition] = useState<[number, number] | null>(null);
 
   useEffect(() => {
-    const fetchCoordinates = async () => {
-      try {
-        if (lng && lat) {
-          const roundedLat = Number(lat.toFixed(2));
-          const roundedLng = Number(lng.toFixed(2));
-          setPosition([roundedLng, -roundedLat]);
-        }
-      } catch (error) {
-        console.error("Error fetching location:", error);
-      }
-    };
+    if (
+      typeof window !== "undefined" &&
+      lat !== undefined &&
+      lng !== undefined
+    ) {
+      const roundedLat = Number(lat.toFixed(2));
+      const roundedLng = Number(lng.toFixed(2));
+      setPosition([roundedLng, -roundedLat]);
 
-    fetchCoordinates();
+      import("leaflet").then((L) => {
+        delete (L.Icon.Default.prototype as any)._getIconUrl;
+        L.Icon.Default.mergeOptions({
+          iconUrl: "/images/mark_map.png",
+          iconSize: [30, 45],
+          iconAnchor: [15, 45],
+        });
+
+        import("react-leaflet").then((RL) => {
+          setLeafletComponents({
+            MapContainer: RL.MapContainer,
+            TileLayer: RL.TileLayer,
+            Marker: RL.Marker,
+            Popup: RL.Popup,
+            Icon: new L.Icon({
+              iconUrl: "/images/mark_map.png",
+              iconSize: [30, 45],
+              iconAnchor: [15, 45],
+            }),
+          });
+        });
+      });
+    }
   }, [lat, lng]);
-  if (!position) return null; // Hide the component entirely when no position is available
+
+  if (!position || !LeafletComponents) return null;
+
+  const { MapContainer, TileLayer, Marker, Popup, Icon } = LeafletComponents;
 
   return (
-    <div className="h-full min-h-[400px] w-full border border-gray-300 p-2">
-      {position ? (
-        <MapContainer
-          center={position}
-          zoom={10}
-          className="h-full w-full flex-1"
-          style={{ height: "400px", width: "100%" }}
-        >
-          <TileLayer url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" />
-
-          <Marker position={position} icon={customMarkerIcon}>
-            <Popup>{`${lat}, ${lng}`}</Popup>
-          </Marker>
-        </MapContainer>
-      ) : (
-        <p>Loading map...</p>
-      )}
+    <div
+      className="relative w-full    p-2"
+      style={{ height: "400px", width: "100%" }}
+    >
+      <MapContainer
+        center={position}
+        zoom={10}
+        className="absolute left-0 top-0 h-full w-full"
+        style={{ height: "100%", width: "100%", padding: "4px" }}
+      >
+        <TileLayer url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" />
+        <Marker position={position} icon={Icon}>
+          <Popup>{`${lat}, ${lng}`}</Popup>
+        </Marker>
+      </MapContainer>
     </div>
   );
 };

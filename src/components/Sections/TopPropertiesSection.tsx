@@ -35,7 +35,7 @@ const TopPropertiesSection = async () => {
   return (
     <>
       {/* Populated grid */}
-      <div className="grid gap-4 mobile:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 pc:grid-cols-4">
+      <div className="grid gap-3 mobile:grid-cols-1 tablet:grid-cols-1 laptop:grid-cols-3 pc:grid-cols-3">
         <Suspense
           fallback={<h1 className="text-2xl text-white">Loading ... </h1>}
         >

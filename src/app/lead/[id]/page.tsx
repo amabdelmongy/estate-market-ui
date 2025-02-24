@@ -169,7 +169,7 @@ const PropertyPage = () => {
             country={SinglePropertyData.address.country}
             province={SinglePropertyData.address.province}
             street={SinglePropertyData.address.street}
-            zip={SinglePropertyData.address.zip}
+            zip={SinglePropertyData.address.zip.toString()}
           />
         </div>
 

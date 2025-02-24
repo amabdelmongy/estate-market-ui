@@ -44,7 +44,7 @@ export async function findAllLeads(
 
 export async function findLeadById(id: string): Promise<Lead> {
   try {
-    const url = `${API_URL}lead/${id}`;
+    let url = `${GetLeadUrl()}/${id}`;
     const response = await axiosInstance.get<Lead>(url);
     return response.data;
   } catch (error) {

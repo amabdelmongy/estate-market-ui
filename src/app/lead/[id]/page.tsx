@@ -158,7 +158,7 @@ const PropertyPage = () => {
 
         {/* description */}
         <div>
-          <DescriptionSection description={lead?.lead_info ?? ""} docs={[]} />
+          <DescriptionSection description={lead?.lead_info ?? ""} />
         </div>
 
         {/* address */}

@@ -24,8 +24,8 @@ const MapComponent: React.FC<{ lat?: number; lng?: number }> = ({
         delete (L.Icon.Default.prototype as any)._getIconUrl;
         L.Icon.Default.mergeOptions({
           iconUrl: "/images/mark_map.png",
-          iconSize: [30, 45],
-          iconAnchor: [15, 45],
+          iconSize: [25, 25],
+          iconAnchor: [15, 15],
         });
 
         import("react-leaflet").then((RL) => {
@@ -36,8 +36,8 @@ const MapComponent: React.FC<{ lat?: number; lng?: number }> = ({
             Popup: RL.Popup,
             Icon: new L.Icon({
               iconUrl: "/images/mark_map.png",
-              iconSize: [30, 45],
-              iconAnchor: [15, 45],
+              iconSize: [30, 30],
+              iconAnchor: [15, 15],
             }),
           });
         });

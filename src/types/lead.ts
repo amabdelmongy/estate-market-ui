@@ -37,6 +37,7 @@ export const DefaultLead: Lead = {
 export interface lead_prop_address_full {
   city?: string;
   state?: string;
+  zipCode?: string;
   lat?: number;
   lng?: number;
 }

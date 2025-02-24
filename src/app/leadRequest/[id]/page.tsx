@@ -1,19 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import { Container, Badge } from "@mantine/core";
+import { Container } from "@mantine/core";
 import MainImagesGalery from "../../../components/PropertyView/MainImagesGalery";
 import Image from "next/image";
 import { showNotification } from "@mantine/notifications";
-import VirtualTourSection from "src/components/PropertyView/VirtualTour";
-import FreaturesSection from "../../../components/PropertyView/Features";
 import AddressSection from "../../../components/PropertyView/Address";
 import DescriptionSection from "../../../components/PropertyView/Description";
 import OverviewSection from "../../../components/PropertyView/Overview";
-import VideoSection from "../../../components/PropertyView/Video";
-import PlansSection from "../../../components/PropertyView/Plans";
-import MapSection from "../../../components/PropertyView/Map";
-import ReviewSection from "../../../components/PropertyView/Review";
-import useNumberFormatter from "src/hooks/useNumberFormatter";
 import ConsultantSection from "src/components/PropertyView/Consultant";
 import { IconCheck, IconX } from "@tabler/icons-react";
 import { ConfigColors } from "src/constants/ConfigColors";
@@ -22,10 +15,7 @@ import { Lead } from "@/types/lead";
 import { useParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { SinglePropertyData } from "@/Data/singlePropertyData";
-
-// individual property page
-// [id] - mean the dynamic route pass the indiividual property id or slug param with Next.js Link component
-// route: /property/123
+import MapComponent from "../../../components/PropertyView/MapComponent";
 
 const PropertyPage = () => {
   // current bookmark state
@@ -66,7 +56,6 @@ const PropertyPage = () => {
     async function fetchData(): Promise<void> {
       try {
         if (typeof id !== "string") {
-          // showNotification.error('id must be a string');
           showNotification({
             message: "id must be a string",
           });
@@ -82,7 +71,17 @@ const PropertyPage = () => {
     }
     void fetchData();
   }, [id]);
-  return (
+  if (!lead) {
+    return (
+      <Container size="xl" className="mt-24 flex justify-center items-center">
+        <p className="text-lg font-semibold text-gray-600 dark:text-white">
+          Loading property details...
+        </p>
+      </Container>
+    );
+  }
+
+  return (lead &&
     <Container size="xl" className="mt-24">
       <div className="relative">
         {/* Main images gallery */}
@@ -109,9 +108,7 @@ const PropertyPage = () => {
       <div className="my-2 flex justify-between space-x-2">
         {/* left */}
         {/* Title */}
-        <h1 className="text-base font-bold dark:text-white/90 tablet:text-xl pc:text-2xl">
-          {lead?.lead_owner_firstname + " " + lead?.lead_owner_lastname}
-        </h1>
+        <h1 className="text-base font-bold dark:text-white/90 tablet:text-xl pc:text-2xl"></h1>
 
         {/* right */}
         {/* Price */}
@@ -119,27 +116,11 @@ const PropertyPage = () => {
           className="rounded-default rounded-sm px-4 py-2 text-center text-base font-bold text-white shadow-sm tablet:text-xl pc:text-2xl"
           style={{ background: ConfigColors.primary }}
         >
-          {useNumberFormatter(lead?.lead_ask_price ?? 0)}
+          <span>Seller Asking Price: </span> <span className="blur">blur</span>{" "}
         </h1>
       </div>
       {/* Location */}
-      <div className="mb-2 text-sm italic text-black/80 dark:text-white/90 pc:text-base">
-        {lead?.lead_prop_address}
-      </div>
-      {/* Badges */}
-      <div className="flex w-full gap-x-4 overflow-x-hidden whitespace-nowrap">
-        {lead?.tags?.map((tag, idx) => (
-          <Badge
-            key={idx}
-            size="lg"
-            variant="filled"
-            radius={"xs"}
-            color={ConfigColors.primary}
-          >
-            {tag}
-          </Badge>
-        ))}
-      </div>
+      <div className="mb-2 text-sm italic text-black/80 dark:text-white/90 pc:text-base"></div>
 
       {/* accordion section */}
       <div className="mt-4 flex flex-col gap-y-4">
@@ -158,63 +139,33 @@ const PropertyPage = () => {
 
         {/* description */}
         <div>
-          <DescriptionSection description={lead?.lead_info ?? ""} />
+          <DescriptionSection description={ ""} lead={lead?? undefined} />
+
         </div>
 
         {/* address */}
         <div>
           <AddressSection
-            area={SinglePropertyData.address.area}
-            city={SinglePropertyData.address.city}
-            country={SinglePropertyData.address.country}
-            province={SinglePropertyData.address.province}
-            street={SinglePropertyData.address.street}
-            zip={SinglePropertyData.address.zip.toString()}
+            area={lead?.lead_prop_address_full?.state ?? ""}
+            city={lead?.lead_prop_address_full?.city ?? ""}
+            country={"USA"}
+            province={"province"}
+            street={"street street"}
+            zip={lead?.lead_prop_address_full?.zipCode ?? ""}
           />
-        </div>
-
-        {/* features */}
-        <div>
-          <FreaturesSection
-            kitchen={SinglePropertyData.features.kitchen}
-            balcony={SinglePropertyData.features.balcony}
-            basement={SinglePropertyData.features.basement}
-            laundry={SinglePropertyData.features.laundry}
-            gymnasium={SinglePropertyData.features.gymnasium}
-            livingRoom={SinglePropertyData.features.livingRoom}
-            backyard={SinglePropertyData.features.backyard}
-            frontyard={SinglePropertyData.features.frontyard}
-            tennisCourt={SinglePropertyData.features.tennisCourt}
-            pool={SinglePropertyData.features.pool}
-            ac={SinglePropertyData.features.ac}
-            electricity={SinglePropertyData.features.electricity}
-            naturalgas={SinglePropertyData.features.naturalGas}
-            purifiedWater={SinglePropertyData.features.purifiedWater}
-            internet={SinglePropertyData.features.internet}
-            elevator={SinglePropertyData.features.elevator}
-            smokeArea={SinglePropertyData.features.smokeArea}
-            accessible={SinglePropertyData.features.accessible}
-          />
-        </div>
-
-        {/* virtual tour (matterport) */}
-        <div>
-          <VirtualTourSection link={SinglePropertyData.virtualTourLink} />
-        </div>
-
-        {/* video */}
-        <div>
-          <VideoSection url={SinglePropertyData.videoURL} />
-        </div>
-
-        {/* plans */}
-        <div>
-          <PlansSection imagesLinks={SinglePropertyData.plans} />
         </div>
 
         {/* map */}
         <div>
-          <MapSection location={SinglePropertyData.location} />
+          <div
+            style={{ minHeight: "410px" }}
+            className="relative w-full bg-white p-1 p-2 dark:bg-slate-900 dark:text-white/90 dark:hover:bg-none"
+          >
+            <MapComponent
+              lat={lead?.lead_prop_address_full?.lat}
+              lng={lead?.lead_prop_address_full?.lng}
+            />
+          </div>
         </div>
 
         {/* consultant */}
@@ -229,11 +180,6 @@ const PropertyPage = () => {
             website={SinglePropertyData.consultant.website}
             socialLinks={SinglePropertyData.consultant.socialLinks}
           />
-        </div>
-
-        {/* review */}
-        <div>
-          <ReviewSection reviews={SinglePropertyData.reviews} />
         </div>
       </div>
     </Container>

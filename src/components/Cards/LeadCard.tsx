@@ -55,7 +55,7 @@ export default function LeadCard({ lead }: Readonly<LeadCardProps>) {
           />
         </div>
 
-        <Link href={"/lead/" + lead?._id}>
+        <Link href={"/leadRequest/" + lead?._id}>
           <div className="flex flex-col space-y-2 p-2">
             {/* Preview images */}
             <div className="flex flex-row items-center justify-center space-x-2">

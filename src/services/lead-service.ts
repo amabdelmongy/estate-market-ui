@@ -69,12 +69,9 @@ export async function postLead(lead: Lead): Promise<Lead> {
   }
 }
 
-export async function patchLead(id: string, lead: Lead): Promise<Lead> {
+export async function patchLead(id: string): Promise<Lead> {
   try {
-    const response = await axiosInstance.patch<Lead>(
-      `${API_URL}lead/${id}`,
-      lead,
-    );
+    const response = await axiosInstance.patch<Lead>(`${GetLeadUrl()}/${id}`);
     return response.data;
   } catch (error) {
     throw new Error(

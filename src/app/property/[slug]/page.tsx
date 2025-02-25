@@ -124,7 +124,6 @@ const PropertyPage = () => {
         <div>
           <DescriptionSection
             description={SinglePropertyData.description}
-
             lead={undefined}
           />
         </div>

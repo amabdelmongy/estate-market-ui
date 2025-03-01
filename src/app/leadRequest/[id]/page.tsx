@@ -205,7 +205,7 @@ const PropertyPage = () => {
                 </Accordion.Control>
                 <Accordion.Panel>
                   <div className="flex justify-between">
-                  <span>
+                    <span>
                       If you are interested in this lead, send us a request, and
                       our team will get back to you shortly. Secure your
                       exclusive access to this lead today.

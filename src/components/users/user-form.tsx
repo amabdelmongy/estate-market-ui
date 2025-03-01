@@ -171,16 +171,12 @@ export function UserForm(): React.JSX.Element {
         <Divider />
         <CardContent>
           <Grid container spacing={3} className="mt-4 space-y-4">
-            <Grid md={6} xs={12}>
+            <Grid md={6} xs={12} className="mt-4">
               <Controller
                 control={control}
                 name="name"
                 render={({ field }) => (
-                  <FormControl
-                    error={Boolean(errors.name)}
-                    fullWidth
-                    className="mt-4"
-                  >
+                  <FormControl error={Boolean(errors.name)} fullWidth>
                     <InputLabel>Name</InputLabel>
                     <OutlinedInput
                       {...field}
@@ -263,9 +259,16 @@ export function UserForm(): React.JSX.Element {
                   <FormControl fullWidth error={Boolean(errors.role)}>
                     <InputLabel>Role</InputLabel>
                     <Select {...field} label="Role" value={field.value || ""}>
-                      <MenuItem value="admin">admin</MenuItem>
-                      <MenuItem value="broker">broker</MenuItem>
-                      <MenuItem value="integration">integration</MenuItem>
+                      <MenuItem value="admin">Admin</MenuItem>
+                      <MenuItem value="broker">Broker</MenuItem>
+                      <MenuItem value="RealEstateAgent">
+                        Real Estate Agent
+                      </MenuItem>
+                      <MenuItem value="WholeSaler">Wholesaler/Flipper</MenuItem>
+                      <MenuItem value="EndBuyerInvestor">
+                        End Buyer Investor
+                      </MenuItem>
+                      {/* EndBuyerInvestor = 'End Buyer Investor'*/}
                     </Select>
                     {errors.role ? (
                       <FormHelperText>{errors.role.message}</FormHelperText>
@@ -274,7 +277,7 @@ export function UserForm(): React.JSX.Element {
                 )}
               />
             </Grid>
-            <Grid md={6} xs={12}>
+            {/* <Grid md={6} xs={12}>
               <Controller
                 control={control}
                 name="lead_campaign"
@@ -294,8 +297,8 @@ export function UserForm(): React.JSX.Element {
                   </FormControl>
                 )}
               />
-            </Grid>
-            <Grid md={6} xs={12}>
+            </Grid> */}
+            {/* <Grid md={6} xs={12}>
               <Controller
                 control={control}
                 name="number_of_seats"
@@ -318,8 +321,8 @@ export function UserForm(): React.JSX.Element {
                   </FormControl>
                 )}
               />
-            </Grid>
-            <Grid md={6} xs={12}>
+            </Grid> */}
+            {/* <Grid md={6} xs={12}>
               <Controller
                 control={control}
                 name="campaign_status"
@@ -345,7 +348,7 @@ export function UserForm(): React.JSX.Element {
                   </FormControl>
                 )}
               />
-            </Grid>
+            </Grid> */}
             <Grid md={6} xs={12}>
               <Controller
                 control={control}

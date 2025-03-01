@@ -73,7 +73,7 @@ export function UsersTable({
             <TableRow>
               <TableCell>Name</TableCell>
               <TableCell>Email</TableCell>
-              <TableCell>Lead Campaign</TableCell>
+              <TableCell>Verified</TableCell>
               <TableCell>Role</TableCell>
               <TableCell>Time Zone</TableCell>
               <TableCell>Active</TableCell>
@@ -103,7 +103,7 @@ export function UsersTable({
                         </Stack>
                       </TableCell>
                       <TableCell>{row.email}</TableCell>
-                      <TableCell>{row.lead_campaign?.toString()}</TableCell>
+                      <TableCell>{row.verified?.toString()}</TableCell>
                       {row.role === "user" ? (
                         <TableCell sx={{ color: "blue" }}>broker</TableCell>
                       ) : (

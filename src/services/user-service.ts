@@ -11,9 +11,14 @@ import axiosInstance from "./axios.instance";
 export async function findAllUsers(
   pageNumber = 1,
   pageLength = 30,
+  keyword?: string,
 ): Promise<AllUsers> {
   try {
-    const url = `${API_URL}user?page=${String(pageNumber)}&pageLength=${String(pageLength)}`;
+    let url = `${API_URL}user?page=${String(pageNumber)}&pageLength=${String(pageLength)}`;
+
+    if (keyword) {
+      url += `&keyword=${String(keyword)}`;
+    }
 
     const response = await axiosInstance.get<AllUsers>(url);
     return response.data; // Return only the data from the response

@@ -28,11 +28,12 @@ export default function Page(): React.JSX.Element {
   const [count, setCount] = React.useState<number | null>(1);
   const [rowsPerPage, setRowsPerPage] = React.useState<number | null>(1);
   const [newRowsPerPage, setNewRowsPerPage] = React.useState<number | null>();
+  const [keyword, setKeyword] = React.useState<string | undefined>();
 
   React.useEffect(() => {
     const fetchUsersData = async (): Promise<void> => {
       try {
-        const data = await findAllUsers(Number(page), newRowsPerPage!);
+        const data = await findAllUsers(Number(page), newRowsPerPage!,keyword);
         setUsersData(data);
         setPage(Number(data.page));
         setRowsPerPage(Number(data.pageLength));
@@ -42,7 +43,7 @@ export default function Page(): React.JSX.Element {
       }
     };
     void fetchUsersData();
-  }, [page, newRowsPerPage]);
+  }, [page, newRowsPerPage,keyword]);
   const handlePageChange = (
     event: React.MouseEvent<HTMLButtonElement> | null,
     reqPage: number,
@@ -65,19 +66,20 @@ export default function Page(): React.JSX.Element {
         <Stack spacing={1} sx={{ flex: "1 1 auto" }}>
           <Typography variant="h4">Users</Typography>
         </Stack>
-        <div>
+        {/* <div>
           <Button
             component={RouterLink}
             // href={paths.dashboard.newUser}
             startIcon={<PlusIcon fontSize="var(--icon-fontSize-md)" />}
             variant="contained"
-                          href={`${paths.dashboard.user}`}
+            href={`${paths.dashboard.user}`}
           >
             Add
           </Button>
-        </div>
+        </div> */}
       </Stack>
-      <UsersFilters />
+      <UsersFilters setSearchParam={setKeyword} />
+
       <UsersTable
         count={Number(count)}
         page={page ? page - 1 : 1}

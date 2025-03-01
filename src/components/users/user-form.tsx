@@ -176,10 +176,7 @@ export function UserForm(): React.JSX.Element {
                 control={control}
                 name="name"
                 render={({ field }) => (
-                  <FormControl
-                    error={Boolean(errors.name)}
-                    fullWidth
-                  >
+                  <FormControl error={Boolean(errors.name)} fullWidth>
                     <InputLabel>Name</InputLabel>
                     <OutlinedInput
                       {...field}
@@ -264,9 +261,13 @@ export function UserForm(): React.JSX.Element {
                     <Select {...field} label="Role" value={field.value || ""}>
                       <MenuItem value="admin">Admin</MenuItem>
                       <MenuItem value="broker">Broker</MenuItem>
-                      <MenuItem value="RealEstateAgent">Real Estate Agent</MenuItem>
+                      <MenuItem value="RealEstateAgent">
+                        Real Estate Agent
+                      </MenuItem>
                       <MenuItem value="WholeSaler">Wholesaler/Flipper</MenuItem>
-                      <MenuItem value="EndBuyerInvestor">End Buyer Investor</MenuItem>
+                      <MenuItem value="EndBuyerInvestor">
+                        End Buyer Investor
+                      </MenuItem>
                       {/* EndBuyerInvestor = 'End Buyer Investor'*/}
                     </Select>
                     {errors.role ? (

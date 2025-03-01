@@ -33,7 +33,7 @@ export default function Page(): React.JSX.Element {
   React.useEffect(() => {
     const fetchUsersData = async (): Promise<void> => {
       try {
-        const data = await findAllUsers(Number(page), newRowsPerPage!,keyword);
+        const data = await findAllUsers(Number(page), newRowsPerPage!, keyword);
         setUsersData(data);
         setPage(Number(data.page));
         setRowsPerPage(Number(data.pageLength));
@@ -43,7 +43,7 @@ export default function Page(): React.JSX.Element {
       }
     };
     void fetchUsersData();
-  }, [page, newRowsPerPage,keyword]);
+  }, [page, newRowsPerPage, keyword]);
   const handlePageChange = (
     event: React.MouseEvent<HTMLButtonElement> | null,
     reqPage: number,

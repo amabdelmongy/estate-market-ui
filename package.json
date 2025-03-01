@@ -15,7 +15,7 @@
     "format:check": "prettier --check \"**/*.{js,jsx,mjs,ts,tsx,mdx}\" --cache",
     "dev": "npm run format:write; npm run lint:fix; tsc --noEmit; next dev",
     "windowsDev": "yarn format:write && yarn lint:fix && tsc --noEmit && yarn next dev ",
-    "windowsD": "npm run format:write && npm run lint:fix && tsc --noEmit && next dev"
+    "windowsD": "npm run lint:fix && tsc --noEmit && next dev"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

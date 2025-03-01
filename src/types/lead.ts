@@ -34,6 +34,14 @@ export const DefaultLead: Lead = {
   lead_info: "",
 };
 
+export interface lead_prop_address_full {
+  city?: string;
+  state?: string;
+  zipCode?: string;
+  lat?: number;
+  lng?: number;
+}
+
 export interface Lead {
   readonly _id?: number;
   readonly lead_id: number;
@@ -58,6 +66,7 @@ export interface Lead {
   readonly lead_mortgage?: number;
 
   readonly lead_prop_address?: string;
+  readonly lead_prop_address_full?: lead_prop_address_full;
 
   readonly building_bedrooms?: number;
   readonly building_bathrooms?: number;

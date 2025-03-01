@@ -67,7 +67,7 @@ const AllPropertiesPage = () => {
         </div>
         <section className="mt-10">
           {/* populated grid */}
-          <div className="grid grid-cols-1 gap-4 tablet:grid-cols-2 laptop:grid-cols-3 pc:grid-cols-4">
+          <div className="grid grid-cols-1 gap-3 tablet:grid-cols-2 laptop:grid-cols-3 pc:grid-cols-3">
             <Suspense fallback={<TopPropertiesLoading />}>
               {allLeads?.leads
                 ?.filter((lead) => lead)

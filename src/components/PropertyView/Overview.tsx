@@ -48,37 +48,37 @@ const OverviewSection = ({
             <div className="flex flex-col items-center justify-center text-sm pc:text-base ">
               <IconCalendarTime style={{ color: ConfigColors.primary }} />
               <div className="font-bold">Built year</div>
-              <div>{builtYear}</div>
+              <div className="blur">{builtYear}</div>
             </div>
             {/* Bedrooms */}
             <div className="flex flex-col items-center justify-center text-sm pc:text-base">
               <IconBed style={{ color: ConfigColors.primary }} />
               <div className="font-bold ">Bedrooms</div>
-              <div>{bedrooms}</div>
+              <div className="blur">{bedrooms}</div>
             </div>
             {/* Bathrooms */}
             <div className="flex flex-col items-center justify-center text-sm pc:text-base">
               <IconBath style={{ color: ConfigColors.primary }} />
               <div className="font-bold">Bathrooms</div>
-              <div>{bathrooms}</div>
+              <div className="blur">{bathrooms}</div>
             </div>
             {/* Garages */}
             <div className="flex flex-col items-center justify-center text-sm pc:text-base">
               <IconCar style={{ color: ConfigColors.primary }} />
               <div className="font-bold">Garages</div>
-              <div>{garages}</div>
+              <div className="blur">{garages}</div>
             </div>
             {/* Sqft */}
             <div className="flex flex-col items-center justify-center text-sm pc:text-base">
               <IconShape style={{ color: ConfigColors.primary }} />
               <div className="font-bold">Squre ft</div>
-              <div>{sqfeets}ft</div>
+              <div className="blur">{sqfeets}ft</div>
             </div>
             {/* Floors */}
             <div className="flex flex-col items-center justify-center text-sm pc:text-base">
               <IconStairs style={{ color: ConfigColors.primary }} />
               <div className="font-bold">Floors</div>
-              <div>{floors}</div>
+              <div className="blur">{floors}</div>
             </div>
           </div>
         </Accordion.Panel>

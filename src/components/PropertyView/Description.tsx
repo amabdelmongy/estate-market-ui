@@ -1,7 +1,13 @@
 import React from "react";
 import { Accordion } from "@mantine/core";
-import { IconExternalLink } from "@tabler/icons-react";
-import Link from "next/link";
+import { IconClock, IconEyeQuestion, IconFriends } from "@tabler/icons-react";
+import { ConfigSizes } from "@/constants/ConfigSizes";
+import {
+  ClosingTimeline,
+  Lead,
+  OccupancyOptions,
+  SellReasonOptions,
+} from "@/types/lead";
 
 // in individual property there are sub collapsable sections for each details
 // this is th description of the property section data
@@ -11,9 +17,9 @@ interface Doc {
 }
 interface DescriptionSectionProps {
   description: string;
-  docs: Doc[];
+  lead?: Lead;
 }
-const DescriptionSection = ({ description, docs }: DescriptionSectionProps) => {
+const DescriptionSection = ({ description, lead }: DescriptionSectionProps) => {
   return (
     <Accordion
       variant="default"
@@ -31,9 +37,38 @@ const DescriptionSection = ({ description, docs }: DescriptionSectionProps) => {
         <Accordion.Panel>
           <div className="flex flex-col justify-between text-sm tablet:text-base pc:text-base">
             <p>{description}</p>
-            <div className="mt-4 font-bold">Documents</div>
             <div className="flex flex-col">
-              {docs.map((doc, idx) => (
+              <div className="flex items-center space-x-2">
+                <IconClock size={ConfigSizes.smallIcons} />{" "}
+                <span>How Fast: </span>{" "}
+                <span>
+                  {lead?.lead_closn_tmln
+                    ? ClosingTimeline[lead?.lead_closn_tmln]
+                    : "Any Time"}
+                </span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <IconEyeQuestion size={ConfigSizes.smallIcons} />{" "}
+                <span>Seller Reason: </span>{" "}
+                <span>
+                  {lead?.lead_sell_reason
+                    ? SellReasonOptions[lead.lead_sell_reason]
+                    : ""}
+                </span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <IconFriends size={ConfigSizes.smallIcons} />{" "}
+                <span> Anyone living in the house?</span>
+              </div>
+              <div className="items-cente flex flex">
+                <span>
+                  {"   "}
+                  {lead?.lead_occupancy
+                    ? OccupancyOptions[lead.lead_occupancy]
+                    : ""}
+                </span>
+              </div>
+              {/* {docs.map((doc, idx) => (
                 <Link
                   key={idx}
                   href={doc.link}
@@ -44,7 +79,7 @@ const DescriptionSection = ({ description, docs }: DescriptionSectionProps) => {
                   <IconExternalLink className="text-primary " />{" "}
                   <span>{doc.title}</span>
                 </Link>
-              ))}
+              ))} */}
             </div>
           </div>
         </Accordion.Panel>

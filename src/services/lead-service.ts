@@ -9,14 +9,22 @@ import { API_URL } from "@/lib/env-config";
 
 import axiosInstance from "./axios.instance";
 
+function GetLeadUrl(): string {
+  // const token = localStorage.getItem("custom-auth-token");
+  // if (token) {
+  //   return `${API_URL}lead`;
+  // }
+
+  return `${API_URL}lead-public`;
+}
+
 export async function findAllLeads(
   createdAt?: Date | null,
   pageNumber = 1,
   search: string | null = "",
 ): Promise<AllLeads> {
   try {
-    let url = `lead?page=${String(pageNumber)}`;
-
+    let url = `${GetLeadUrl()}?page=${String(pageNumber)}&pageLength=12`;
     if (createdAt) {
       url += `&createdAt=${String(moment(createdAt).format("YYYY-MM-DD"))}`;
     }
@@ -36,7 +44,7 @@ export async function findAllLeads(
 
 export async function findLeadById(id: string): Promise<Lead> {
   try {
-    const url = `${API_URL}lead/${id}`;
+    let url = `${GetLeadUrl()}/${id}`;
     const response = await axiosInstance.get<Lead>(url);
     return response.data;
   } catch (error) {
@@ -61,12 +69,9 @@ export async function postLead(lead: Lead): Promise<Lead> {
   }
 }
 
-export async function patchLead(id: string, lead: Lead): Promise<Lead> {
+export async function patchLead(id: string): Promise<Lead> {
   try {
-    const response = await axiosInstance.patch<Lead>(
-      `${API_URL}lead/${id}`,
-      lead,
-    );
+    const response = await axiosInstance.patch<Lead>(`${GetLeadUrl()}/${id}`);
     return response.data;
   } catch (error) {
     throw new Error(

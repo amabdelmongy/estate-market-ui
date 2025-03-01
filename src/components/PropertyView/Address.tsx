@@ -9,7 +9,7 @@ interface AddressSectionProps {
   city: string;
   area: string;
   province: string;
-  zip: number;
+  zip: string;
   country: string;
 }
 
@@ -40,7 +40,7 @@ const AddressSection = ({
           <div className="grid grid-cols-1 text-sm tablet:grid-cols-2  pc:grid-cols-3 pc:text-base">
             <div>
               <span className="font-bold">Sreet : </span>
-              <span>{street}</span>
+              <span className="blur">{street}</span>
             </div>
             <div>
               <span className="font-bold">City : </span>
@@ -52,7 +52,7 @@ const AddressSection = ({
             </div>
             <div>
               <span className="font-bold">Province : </span>
-              <span>{province}</span>
+              <span className="blur">{province}</span>
             </div>
             <div>
               <span className="font-bold">Zip : </span>

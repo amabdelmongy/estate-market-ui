@@ -124,7 +124,7 @@ const PropertyPage = () => {
         <div>
           <DescriptionSection
             description={SinglePropertyData.description}
-            docs={SinglePropertyData.documents}
+            lead={undefined}
           />
         </div>
 
@@ -136,7 +136,7 @@ const PropertyPage = () => {
             country={SinglePropertyData.address.country}
             province={SinglePropertyData.address.province}
             street={SinglePropertyData.address.street}
-            zip={SinglePropertyData.address.zip}
+            zip={SinglePropertyData.address.zip.toString()}
           />
         </div>
 

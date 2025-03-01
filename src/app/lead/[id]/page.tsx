@@ -1,10 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { Container } from "@mantine/core";
+import { Container, Badge } from "@mantine/core";
 import MainImagesGalery from "../../../components/PropertyView/MainImagesGalery";
 import Image from "next/image";
 import { showNotification } from "@mantine/notifications";
-import { Badge } from "@mantine/core";
 import VirtualTourSection from "src/components/PropertyView/VirtualTour";
 import FreaturesSection from "../../../components/PropertyView/Features";
 import AddressSection from "../../../components/PropertyView/Address";
@@ -159,7 +158,7 @@ const PropertyPage = () => {
 
         {/* description */}
         <div>
-          <DescriptionSection description={lead?.lead_info ?? ""} docs={[]} />
+          <DescriptionSection description={lead?.lead_info ?? ""} />
         </div>
 
         {/* address */}
@@ -170,7 +169,7 @@ const PropertyPage = () => {
             country={SinglePropertyData.address.country}
             province={SinglePropertyData.address.province}
             street={SinglePropertyData.address.street}
-            zip={SinglePropertyData.address.zip}
+            zip={SinglePropertyData.address.zip.toString()}
           />
         </div>
 

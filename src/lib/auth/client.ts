@@ -156,6 +156,20 @@ class AuthClient {
     }
     return { error: response?.data?.message ?? response.error ?? "" };
   }
+
+  async verifyToken (token:string | string[]){
+    try {
+      const response = await fetch(`${API_URL}verify-email/${token}`);
+      const data = await response.json();
+
+      if (data?.message === "success") {
+        // toast.success("Verification successful!");
+        return {};
+      }
+    } catch (error) {
+      return { error: (error) || "" };
+    }
+  };
 }
 
 export const authClient = new AuthClient();

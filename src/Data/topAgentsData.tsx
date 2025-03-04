@@ -1,19 +1,19 @@
 // dummy data of top selected agents details
 
-import {
-  IconBrandFacebook,
-  IconBrandInstagram,
-  IconBrandLinkedin,
-  IconBrandPinterest,
-  IconBrandX,
-  IconBrandYoutube,
-} from "@tabler/icons-react";
+// import {
+//   IconBrandFacebook,
+//   IconBrandInstagram,
+//   IconBrandLinkedin,
+//   IconBrandPinterest,
+//   IconBrandX,
+//   IconBrandYoutube,
+// } from "@tabler/icons-react";
 
-interface SocialLink {
-  name: string;
-  link: string;
-  icon: React.ReactNode;
-}
+// interface SocialLink {
+//   name: string;
+//   link: string;
+//   icon: React.ReactNode;
+// }
 
 interface TopAgentsDataProps {
   id: number;
@@ -21,7 +21,7 @@ interface TopAgentsDataProps {
   name: string;
   profession: string;
   description: string;
-  socialLinks: SocialLink[];
+  // socialLinks: SocialLink[];
 }
 
 export const TopAgentsData: TopAgentsDataProps[] = [
@@ -31,22 +31,22 @@ export const TopAgentsData: TopAgentsDataProps[] = [
     name: "John carl",
     profession: "Architecture",
     description: "Exellant site to work with",
-    socialLinks: [
-      { name: "Facebook", link: "facebook.com", icon: <IconBrandFacebook /> },
-      { name: "X", link: "x.com", icon: <IconBrandX /> },
-      {
-        name: "Instagram",
-        link: "instagram.com",
-        icon: <IconBrandInstagram />,
-      },
-      { name: "YouTube", link: "youtube.com", icon: <IconBrandYoutube /> },
-      { name: "LinkedIn", link: "linkedin.com", icon: <IconBrandLinkedin /> },
-      {
-        name: "Pinterest",
-        link: "pinterest.com",
-        icon: <IconBrandPinterest />,
-      },
-    ],
+    // socialLinks: [
+    //   { name: "Facebook", link: "facebook.com", icon: <IconBrandFacebook /> },
+    //   { name: "X", link: "x.com", icon: <IconBrandX /> },
+    //   {
+    //     name: "Instagram",
+    //     link: "instagram.com",
+    //     icon: <IconBrandInstagram />,
+    //   },
+    //   { name: "YouTube", link: "youtube.com", icon: <IconBrandYoutube /> },
+    //   { name: "LinkedIn", link: "linkedin.com", icon: <IconBrandLinkedin /> },
+    //   {
+    //     name: "Pinterest",
+    //     link: "pinterest.com",
+    //     icon: <IconBrandPinterest />,
+    //   },
+    // ],
   },
   {
     id: 2,
@@ -54,22 +54,22 @@ export const TopAgentsData: TopAgentsDataProps[] = [
     name: "Carl johnson",
     profession: "Consultant",
     description: "Amazing platform to coporate with clients",
-    socialLinks: [
-      { name: "Facebook", link: "facebook.com", icon: <IconBrandFacebook /> },
-      { name: "X", link: "x.com", icon: <IconBrandX /> },
-      {
-        name: "Instagram",
-        link: "instagram.com",
-        icon: <IconBrandInstagram />,
-      },
-      { name: "YouTube", link: "youtube.com", icon: <IconBrandYoutube /> },
-      { name: "LinkedIn", link: "linkedin.com", icon: <IconBrandLinkedin /> },
-      {
-        name: "Pinterest",
-        link: "pinterest.com",
-        icon: <IconBrandPinterest />,
-      },
-    ],
+    // socialLinks: [
+    //   { name: "Facebook", link: "facebook.com", icon: <IconBrandFacebook /> },
+    //   { name: "X", link: "x.com", icon: <IconBrandX /> },
+    //   {
+    //     name: "Instagram",
+    //     link: "instagram.com",
+    //     icon: <IconBrandInstagram />,
+    //   },
+    //   { name: "YouTube", link: "youtube.com", icon: <IconBrandYoutube /> },
+    //   { name: "LinkedIn", link: "linkedin.com", icon: <IconBrandLinkedin /> },
+    //   {
+    //     name: "Pinterest",
+    //     link: "pinterest.com",
+    //     icon: <IconBrandPinterest />,
+    //   },
+    // ],
   },
   {
     id: 3,
@@ -77,22 +77,22 @@ export const TopAgentsData: TopAgentsDataProps[] = [
     name: "Alexa johnson",
     profession: "Civil enginer",
     description: "New connections with new platform",
-    socialLinks: [
-      { name: "Facebook", link: "facebook.com", icon: <IconBrandFacebook /> },
-      { name: "X", link: "x.com", icon: <IconBrandX /> },
-      {
-        name: "Instagram",
-        link: "instagram.com",
-        icon: <IconBrandInstagram />,
-      },
-      { name: "YouTube", link: "youtube.com", icon: <IconBrandYoutube /> },
-      { name: "LinkedIn", link: "linkedin.com", icon: <IconBrandLinkedin /> },
-      {
-        name: "Pinterest",
-        link: "pinterest.com",
-        icon: <IconBrandPinterest />,
-      },
-    ],
+    // socialLinks: [
+    //   { name: "Facebook", link: "facebook.com", icon: <IconBrandFacebook /> },
+    //   { name: "X", link: "x.com", icon: <IconBrandX /> },
+    //   {
+    //     name: "Instagram",
+    //     link: "instagram.com",
+    //     icon: <IconBrandInstagram />,
+    //   },
+    //   { name: "YouTube", link: "youtube.com", icon: <IconBrandYoutube /> },
+    //   { name: "LinkedIn", link: "linkedin.com", icon: <IconBrandLinkedin /> },
+    //   {
+    //     name: "Pinterest",
+    //     link: "pinterest.com",
+    //     icon: <IconBrandPinterest />,
+    //   },
+    // ],
   },
   {
     id: 4,
@@ -100,21 +100,21 @@ export const TopAgentsData: TopAgentsDataProps[] = [
     name: "Jenny kotkova",
     profession: "Architecture",
     description: "Wonderful platform and easy to work with ",
-    socialLinks: [
-      { name: "Facebook", link: "facebook.com", icon: <IconBrandFacebook /> },
-      { name: "X", link: "x.com", icon: <IconBrandX /> },
-      {
-        name: "Instagram",
-        link: "instagram.com",
-        icon: <IconBrandInstagram />,
-      },
-      { name: "YouTube", link: "youtube.com", icon: <IconBrandYoutube /> },
-      { name: "LinkedIn", link: "linkedin.com", icon: <IconBrandLinkedin /> },
-      {
-        name: "Pinterest",
-        link: "pinterest.com",
-        icon: <IconBrandPinterest />,
-      },
-    ],
+    // socialLinks: [
+    //   { name: "Facebook", link: "facebook.com", icon: <IconBrandFacebook /> },
+    //   { name: "X", link: "x.com", icon: <IconBrandX /> },
+    //   {
+    //     name: "Instagram",
+    //     link: "instagram.com",
+    //     icon: <IconBrandInstagram />,
+    //   },
+    //   { name: "YouTube", link: "youtube.com", icon: <IconBrandYoutube /> },
+    //   { name: "LinkedIn", link: "linkedin.com", icon: <IconBrandLinkedin /> },
+    //   {
+    //     name: "Pinterest",
+    //     link: "pinterest.com",
+    //     icon: <IconBrandPinterest />,
+    //   },
+    // ],
   },
 ];

@@ -10,6 +10,7 @@ export interface User {
   campaign_status?: string;
   [key: string]: unknown;
   timeZone?: string | undefined;
+  phoneNumber?: string;
 }
 
 export interface AllUsers {
@@ -28,6 +29,7 @@ export interface LoggedInUser {
   number_of_seats?: string;
   campaign_status?: string;
   timeZone?: string;
+  phoneNumber?: string;
 }
 
 export const timeZones = [

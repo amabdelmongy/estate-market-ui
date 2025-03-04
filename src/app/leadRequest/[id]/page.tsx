@@ -230,7 +230,7 @@ const PropertyPage = () => {
               landNumber={SinglePropertyData.consultant.landNumber}
               email={SinglePropertyData.consultant.email}
               website={SinglePropertyData.consultant.website}
-              socialLinks={SinglePropertyData.consultant.socialLinks}
+              // socialLinks={SinglePropertyData.consultant.socialLinks}
             />
           </div>
         </div>

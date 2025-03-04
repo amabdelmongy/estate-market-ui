@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import PrimaryButton from "../Buttons/PrimaryButton";
 import Link from "next/link";
-import { TextInput, PasswordInput, Group } from "@mantine/core";
+import { TextInput, PasswordInput, Select, Group } from "@mantine/core";
 import { IconMailFast } from "@tabler/icons-react";
 import { useForm } from "@mantine/form";
 import { showNotification } from "@mantine/notifications";
@@ -16,6 +16,12 @@ import { FRONT_URL } from "@/lib/env-config";
 
 // authentication page
 // register page
+
+const roleOptions = [
+  { value: "realEstateAgent", label: "Real state agent" },
+  { value: "wholeSaler", label: "Wholesaler/Flipper" },
+  { value: "endBuyerInvestor", label: "End buyer" },
+];
 
 const RegisterForm = () => {
   const router = useRouter();
@@ -31,6 +37,8 @@ const RegisterForm = () => {
         email: values.email,
         password: values.password,
         name: values.name,
+        role: values.role,
+        phoneNumber: values.phoneNumber,
       });
 
       if (response.error) {
@@ -65,11 +73,24 @@ const RegisterForm = () => {
       name: "",
       email: "",
       password: "",
+      confirmPassword: "",
+      phoneNumber: "",
+      role: "",
     },
 
     validate: {
       email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
-      password: (value) => (/^\S/.test(value) ? null : "Invalid password"),
+      password: (value) =>
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,20}$/.test(
+          value,
+        )
+          ? null
+          : "Invalid password",
+      confirmPassword: (value, values) =>
+        value !== values.password ? "Passwords do not match" : null,
+      phoneNumber: (value) =>
+        /^\d{7,}$/.test(value) ? null : "Invalid phone number",
+      role: (value) => (value ? null : "Role is required"),
       name: (value) => (/^\S/.test(value) ? null : "Invalid name"),
     },
   });
@@ -119,6 +140,48 @@ const RegisterForm = () => {
               label="Password"
               {...form.getInputProps("password")}
               onBlur={() => form.validateField("password")}
+              classNames={{
+                label: "dark:text-white",
+                input: "dark:bg-slate-800 dark:text-white/90",
+              }}
+            />
+
+            {/* Confirm Password */}
+            <PasswordInput
+              withAsterisk
+              placeholder="Repeat password"
+              label="Confirm password"
+              {...form.getInputProps("confirmPassword")}
+              onBlur={() => form.validateField("confirmPassword")}
+              classNames={{
+                label: "dark:text-white",
+                input: "dark:bg-slate-800 dark:text-white/90",
+              }}
+            />
+
+            {/* Phone Number */}
+            <TextInput
+              withAsterisk
+              required
+              label="Phone number"
+              placeholder="1234567890"
+              {...form.getInputProps("phoneNumber")}
+              onBlur={() => form.validateField("phoneNumber")}
+              classNames={{
+                label: "dark:text-white",
+                input: "dark:bg-slate-800 dark:text-white/90",
+              }}
+            />
+
+            {/* Role */}
+            <Select
+              withAsterisk
+              required
+              label="Role"
+              placeholder="Select role"
+              data={roleOptions}
+              {...form.getInputProps("role")}
+              onBlur={() => form.validateField("role")}
               classNames={{
                 label: "dark:text-white",
                 input: "dark:bg-slate-800 dark:text-white/90",

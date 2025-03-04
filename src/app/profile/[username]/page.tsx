@@ -21,12 +21,14 @@ const ProfileViewPage = () => {
   }
   let userName = "";
   let userEmail = "";
+  let phoneNumber = "";
   const userData = loggedUserData
     ? (JSON.parse(loggedUserData) as LoggedInUser)
     : undefined;
   if (userData) {
     userName = userData?.name ?? "";
     userEmail = userData?.email ?? "";
+    phoneNumber = userData?.phoneNumber ?? "";
   }
 
   return (
@@ -49,9 +51,17 @@ const ProfileViewPage = () => {
             {/* Name */}
             <div className="text-2xl font-bold">{userData?.name}</div>
             {/* Profession */}
-            <div className="text-lg opacity-80">{userData?.role}</div>
+            <div className="text-lg opacity-80">
+              {/* {userData?.role} */}
+                   {  userData?.role === "admin"  &&<> <span className="font-bold">Role:</span> Admin</>}
+            {  userData?.role === "broker"  &&<> <span className="font-bold">Role:</span> Broker</>}
+            {  userData?.role === "integration"  &&<> <span className="font-bold">Role:</span> Integration</>}
+            {  userData?.role === "realEstateAgent"  &&<> <span className="font-bold">Role:</span> Real state agent</>}
+            {  userData?.role === "wholeSaler"  &&<> <span className="font-bold">Role:</span> Wholesaler/Flipper</>}
+            {  userData?.role === "endBuyerInvestor"  &&<> <span className="font-bold">Role:</span> End buyer</>}
+              </div>
             {/* About me */}
-            <p className="text-sm opacity-80">{UserData.aboutme}</p>
+            {/* <p className="text-sm opacity-80">{UserData.aboutme}</p> */}
             {/* Ratings */}
             <div className="flex space-x-2">
               <Rating
@@ -74,7 +84,7 @@ const ProfileViewPage = () => {
               {/* phone */}
               <li className="flex gap-x-2">
                 <IconPhone color={ConfigColors.primary} />
-                <span>{UserData.phone}</span>
+                <span>{phoneNumber}</span>
               </li>
               {/* email */}
               <li className="flex gap-x-2">
@@ -90,9 +100,8 @@ const ProfileViewPage = () => {
 
             {/* social links */}
             <div className="mt-4 flex hidden justify-between space-x-2">
-              {UserData.socialLinks.map((link, idx) => (
+              {/* {UserData.socialLinks.map((link, idx) => (
                 <Link href={link.link} key={idx}>
-                  {/* <SecondaryButton icon={link.icon} /> */}
                   <span
                     className="duration-300 hover:opacity-50"
                     style={{ color: ConfigColors.primary }}
@@ -100,7 +109,7 @@ const ProfileViewPage = () => {
                     {link.icon}
                   </span>
                 </Link>
-              ))}
+              ))} */}
             </div>
           </div>
         </div>

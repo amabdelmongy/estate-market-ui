@@ -79,7 +79,9 @@ const RightSection = () => {
       : []),
     { title: "All properties", link: Routes.allProperties },
     ...(userData ? [{ title: "Add property", link: Routes.addProperty }] : []),
-    ...(userData ? [{ title: "Users", link: Routes.users }] : []),
+    ...(userData?.role == "admin"
+      ? [{ title: "Users", link: Routes.users }]
+      : []),
     ...(userData ? [{ title: "Logout", link: Routes.login, red: true }] : []),
     ...(!userData ? [{ title: "Login", link: Routes.login }] : []),
   ];
@@ -170,11 +172,23 @@ const RightSection = () => {
           </div>
         </div>
 
-        <div className="mt-32 flex w-full flex-col items-center justify-center gap-y-4">
+        <div className="mt-12 flex w-full flex-col items-center justify-center gap-y-4">
           <div>
             <h1 className="text-2xl font-bold dark:text-white/90">
               {userData?.name}
             </h1>
+            <h2 className="text-xl  dark:text-white/90">
+              <span className="font-bold"> Email:</span> {userData?.email}
+            </h2>
+            <h2 className="text-xl  dark:text-white/90">
+              {/* <span className="font-bold">Role:</span> {userData?.role} */}
+            {  userData?.role === "admin"  &&<> <span className="font-bold">Role:</span> Admin</>}
+            {  userData?.role === "broker"  &&<> <span className="font-bold">Role:</span> Broker</>}
+            {  userData?.role === "integration"  &&<> <span className="font-bold">Role:</span> Integration</>}
+            {  userData?.role === "realEstateAgent"  &&<> <span className="font-bold">Role:</span> Real state agent</>}
+            {  userData?.role === "wholeSaler"  &&<> <span className="font-bold">Role:</span> Wholesaler/Flipper</>}
+            {  userData?.role === "endBuyerInvestor"  &&<> <span className="font-bold">Role:</span> End buyer</>}
+            </h2>
           </div>
           <div>
             <div className="flex w-full flex-col space-y-4">

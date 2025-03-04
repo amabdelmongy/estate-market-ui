@@ -26,7 +26,7 @@ interface IConsultant {
   landNumber: string;
   email: string;
   website: string;
-  socialLinks: ISocialLinks[];
+  // socialLinks: ISocialLinks[];
 }
 
 const ConsultantSection = ({
@@ -37,7 +37,7 @@ const ConsultantSection = ({
   landNumber,
   email,
   website,
-  socialLinks,
+  // socialLinks,
 }: IConsultant) => {
   return (
     <Accordion
@@ -94,7 +94,7 @@ const ConsultantSection = ({
                 {/* social links */}
                 <div className="flex gap-x-2">
                   <div className="flex gap-x-2">
-                    {socialLinks.map((link, idx) => (
+                    {/* {socialLinks.map((link, idx) => (
                       <Link href={link.link} key={idx}>
                         <ActionIcon
                           variant="filled"
@@ -105,7 +105,7 @@ const ConsultantSection = ({
                           {link.icon}
                         </ActionIcon>
                       </Link>
-                    ))}
+                    ))} */}
                   </div>
                 </div>
               </div>

@@ -45,7 +45,7 @@ const TopAgentsSection = async () => {
                   {agent.description}
                 </div>
                 {/* Social links */}
-                <div className="mt-4 flex flex-row space-x-2">
+                {/* <div className="mt-4 flex flex-row space-x-2">
                   {agent.socialLinks.map((link, idx) => (
                     <Link href={link.link} key={idx}>
                       <span
@@ -56,7 +56,7 @@ const TopAgentsSection = async () => {
                       </span>
                     </Link>
                   ))}
-                </div>
+                </div> */}
               </div>
             </div>
           </Link>

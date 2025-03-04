@@ -8,8 +8,8 @@ import DescriptionStep from "../../components/AddProperty/DescriptionStep";
 import AddressStep from "../../components/AddProperty/AddressStep";
 import FeatuersStep from "../../components/AddProperty/FeaturesStep";
 import AssetsStep from "../../components/AddProperty/AssetsStep";
-import ConsultantStep from "../../components/AddProperty/ConsultantStep";
-import SocialLinksStep from "../../components/AddProperty/SocialLinksStep";
+// import ConsultantStep from "../../components/AddProperty/ConsultantStep";
+// import SocialLinksStep from "../../components/AddProperty/SocialLinksStep";
 import PrimaryButton from "src/components/Buttons/PrimaryButton";
 
 // add new property page
@@ -107,9 +107,9 @@ const AddPropertyPage = () => {
           >
             <div className="rounded-default bg-white p-2 dark:bg-slate-900 dark:text-white/90">
               <div className="text-lg font-bold">Consultant section</div>
-              <ConsultantStep />
+              {/* <ConsultantStep />
               <div className="mt-2 text-lg font-bold">Social links section</div>
-              <SocialLinksStep />
+              <SocialLinksStep /> */}
             </div>
           </Stepper.Step>
         </Stepper>

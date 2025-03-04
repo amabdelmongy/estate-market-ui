@@ -1,11 +1,11 @@
-import {
-  IconBrandFacebook,
-  IconBrandInstagram,
-  IconBrandLinkedin,
-  IconBrandPinterest,
-  IconBrandX,
-  IconBrandYoutube,
-} from "@tabler/icons-react";
+// import {
+//   IconBrandFacebook,
+//   IconBrandInstagram,
+//   IconBrandLinkedin,
+//   IconBrandPinterest,
+//   IconBrandX,
+//   IconBrandYoutube,
+// } from "@tabler/icons-react";
 import React from "react";
 
 interface IAddress {
@@ -35,11 +35,11 @@ interface IReview {
   comment: string;
 }
 
-interface ISocialLink {
-  name: string;
-  link: string;
-  icon: React.ReactNode; // Assuming you have React components for icons
-}
+// interface ISocialLink {
+//   name: string;
+//   link: string;
+//   icon: React.ReactNode; // Assuming you have React components for icons
+// }
 
 interface IConsultant {
   avatar: string;
@@ -49,7 +49,7 @@ interface IConsultant {
   landNumber: string;
   email: string;
   website: string;
-  socialLinks: ISocialLink[];
+  // socialLinks: ISocialLink[];
 }
 
 interface ISinglePropertyData {
@@ -169,21 +169,21 @@ export const SinglePropertyData: ISinglePropertyData = {
     landNumber: "075-6141531",
     email: "example@mail.com",
     website: "website.com",
-    socialLinks: [
-      { name: "Facebook", link: "facebook.com", icon: <IconBrandFacebook /> },
-      { name: "X", link: "x.com", icon: <IconBrandX /> },
-      {
-        name: "Instagram",
-        link: "instagram.com",
-        icon: <IconBrandInstagram />,
-      },
-      { name: "YouTube", link: "youtube.com", icon: <IconBrandYoutube /> },
-      { name: "LinkedIn", link: "linkedin.com", icon: <IconBrandLinkedin /> },
-      {
-        name: "Pinterest",
-        link: "pinterest.com",
-        icon: <IconBrandPinterest />,
-      },
-    ],
+    // socialLinks: [
+    //   { name: "Facebook", link: "facebook.com", icon: <IconBrandFacebook /> },
+    //   { name: "X", link: "x.com", icon: <IconBrandX /> },
+    //   {
+    //     name: "Instagram",
+    //     link: "instagram.com",
+    //     icon: <IconBrandInstagram />,
+    //   },
+    //   { name: "YouTube", link: "youtube.com", icon: <IconBrandYoutube /> },
+    //   { name: "LinkedIn", link: "linkedin.com", icon: <IconBrandLinkedin /> },
+    //   {
+    //     name: "Pinterest",
+    //     link: "pinterest.com",
+    //     icon: <IconBrandPinterest />,
+    //   },
+    // ],
   },
 };

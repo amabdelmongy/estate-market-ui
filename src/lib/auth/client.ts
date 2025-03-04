@@ -25,6 +25,7 @@ export interface SignUpParams {
   role?: string;
   lead_campaign?: number;
   recaptchaToken?: string;
+  phoneNumber?: string;
 }
 
 export interface SignInWithOAuthParams {
@@ -106,6 +107,7 @@ class AuthClient {
           name: userData?.name,
           email: userData?.email,
           role: userData?.role,
+          phoneNumber: userData?.phoneNumber,
         }),
       );
 
